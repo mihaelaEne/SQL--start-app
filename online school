@@ -1,0 +1,396 @@
+create database online_school_db;
+
+use online_school_db;
+
+create table student (
+    id int primary key ,
+    first_name text  not null ,
+    last_name text  not null ,
+    email VARCHAR(255) UNIQUE NOT NULL ,
+    age int not null
+);
+
+create table course(
+    id int primary key ,
+    name text not null,
+    department text not null
+);
+
+
+create table book(
+    id int primary key ,
+    student_id INTEGER NOT NULL,
+    book_name text not null,
+    created_at TIMESTAMP DEFAULT NOW(),
+    foreign key (student_id) references student(id)
+
+);
+
+create table student_id_card(
+    id int primary key ,
+    student_id INTEGER NOT NULL,
+    card_number VARCHAR(255) UNIQUE NOT NULL ,
+    foreign key (student_id) references student(id)
+);
+
+
+CREATE TABLE enrolment (
+    student_id INTEGER NOT NULL,
+    course_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (student_id, course_id),
+    FOREIGN KEY (student_id) REFERENCES student(id),
+    FOREIGN KEY (course_id) REFERENCES course(id)
+);
+
+insert into student (id, first_name, last_name, email, age) values (1, 'Reeba', 'Screaton', 'rscreaton0@wiley.com', 48);
+insert into student (id, first_name, last_name, email, age) values (2, 'Arabele', 'Banghe', 'abanghe1@storify.com', 76);
+insert into student (id, first_name, last_name, email, age) values (3, 'Gan', 'Skechley', 'gskechley2@irs.gov', 78);
+insert into student (id, first_name, last_name, email, age) values (4, 'Dillon', 'Burhouse', 'dburhouse3@mit.edu', 60);
+insert into student (id, first_name, last_name, email, age) values (5, 'Crystie', 'Ravelus', 'cravelus4@theglobeandmail.com', 82);
+insert into student (id, first_name, last_name, email, age) values (6, 'Myra', 'Hasselby', 'mhasselby5@cocolog-nifty.com', 68);
+insert into student (id, first_name, last_name, email, age) values (7, 'Haleigh', 'Fritter', 'hfritter6@walmart.com', 61);
+insert into student (id, first_name, last_name, email, age) values (8, 'Viviyan', 'Jobbins', 'vjobbins7@yale.edu', 85);
+insert into student (id, first_name, last_name, email, age) values (9, 'Jeannine', 'Lafranconi', 'jlafranconi8@wikipedia.org', 86);
+insert into student (id, first_name, last_name, email, age) values (10, 'Conny', 'MacCorkell', 'cmaccorkell9@businesswire.com', 53);
+insert into student (id, first_name, last_name, email, age) values (11, 'Odette', 'Scadding', 'oscaddinga@businessinsider.com', 49);
+insert into student (id, first_name, last_name, email, age) values (12, 'Rea', 'Crocetti', 'rcrocettib@wordpress.com', 77);
+insert into student (id, first_name, last_name, email, age) values (13, 'Reeva', 'Zannotti', 'rzannottic@people.com.cn', 82);
+insert into student (id, first_name, last_name, email, age) values (14, 'Heda', 'Finder', 'hfinderd@acquirethisname.com', 40);
+insert into student (id, first_name, last_name, email, age) values (15, 'Sasha', 'Stoneman', 'sstonemane@hatena.ne.jp', 56);
+insert into student (id, first_name, last_name, email, age) values (16, 'Reine', 'Rate', 'rratef@aol.com', 44);
+insert into student (id, first_name, last_name, email, age) values (17, 'Paola', 'Denning', 'pdenningg@jiathis.com', 74);
+insert into student (id, first_name, last_name, email, age) values (18, 'Inga', 'Stollenwerck', 'istollenwerckh@xing.com', 73);
+insert into student (id, first_name, last_name, email, age) values (19, 'Latia', 'Clayworth', 'lclayworthi@netscape.com', 93);
+insert into student (id, first_name, last_name, email, age) values (20, 'Larina', 'Tanner', 'ltannerj@berkeley.edu', 45);
+insert into student (id, first_name, last_name, email, age) values (21, 'Shelba', 'Pounsett', 'spounsettk@example.com', 33);
+insert into student (id, first_name, last_name, email, age) values (22, 'Birgitta', 'Alejandri', 'balejandril@lulu.com', 96);
+insert into student (id, first_name, last_name, email, age) values (23, 'Wright', 'Blackwell', 'wblackwellm@illinois.edu', 34);
+insert into student (id, first_name, last_name, email, age) values (24, 'Erinna', 'Vannoort', 'evannoortn@cnn.com', 64);
+insert into student (id, first_name, last_name, email, age) values (25, 'Arlee', 'Newark', 'anewarko@prnewswire.com', 82);
+insert into student (id, first_name, last_name, email, age) values (26, 'Malissia', 'Rableau', 'mrableaup@accuweather.com', 55);
+insert into student (id, first_name, last_name, email, age) values (27, 'Shelby', 'Pantone', 'spantoneq@dell.com', 73);
+insert into student (id, first_name, last_name, email, age) values (28, 'Luigi', 'Bundock', 'lbundockr@miitbeian.gov.cn', 100);
+insert into student (id, first_name, last_name, email, age) values (29, 'Gussi', 'Rollitt', 'grollitts@alibaba.com', 65);
+insert into student (id, first_name, last_name, email, age) values (30, 'Laurice', 'Gohier', 'lgohiert@wix.com', 59);
+insert into student (id, first_name, last_name, email, age) values (31, 'Anallese', 'Lamberti', 'alambertiu@wikispaces.com', 78);
+insert into student (id, first_name, last_name, email, age) values (32, 'Ulrike', 'Yanele', 'uyanelev@apache.org', 94);
+insert into student (id, first_name, last_name, email, age) values (33, 'Bidget', 'Matityahu', 'bmatityahuw@mozilla.org', 71);
+insert into student (id, first_name, last_name, email, age) values (34, 'Grannie', 'Pezey', 'gpezeyx@slashdot.org', 51);
+insert into student (id, first_name, last_name, email, age) values (35, 'Vernen', 'Latch', 'vlatchy@pbs.org', 24);
+insert into student (id, first_name, last_name, email, age) values (36, 'Merrilee', 'Jonas', 'mjonasz@freewebs.com', 36);
+insert into student (id, first_name, last_name, email, age) values (37, 'Vivia', 'Sterling', 'vsterling10@usatoday.com', 50);
+insert into student (id, first_name, last_name, email, age) values (38, 'Wildon', 'Hatzar', 'whatzar11@com.com', 88);
+insert into student (id, first_name, last_name, email, age) values (39, 'Artur', 'Darte', 'adarte12@eepurl.com', 86);
+insert into student (id, first_name, last_name, email, age) values (40, 'Murielle', 'Quantrell', 'mquantrell13@stumbleupon.com', 71);
+insert into student (id, first_name, last_name, email, age) values (41, 'Lucine', 'Iannuzzelli', 'liannuzzelli14@cnbc.com', 69);
+insert into student (id, first_name, last_name, email, age) values (42, 'Tabina', 'Hacard', 'thacard15@miibeian.gov.cn', 95);
+insert into student (id, first_name, last_name, email, age) values (43, 'Nev', 'Vonderdell', 'nvonderdell16@oakley.com', 49);
+insert into student (id, first_name, last_name, email, age) values (44, 'Livvyy', 'Fernan', 'lfernan17@economist.com', 99);
+insert into student (id, first_name, last_name, email, age) values (45, 'Dino', 'Commander', 'dcommander18@cisco.com', 73);
+insert into student (id, first_name, last_name, email, age) values (46, 'Pepita', 'Southerns', 'psoutherns19@cmu.edu', 55);
+insert into student (id, first_name, last_name, email, age) values (47, 'Livia', 'Simmank', 'lsimmank1a@tiny.cc', 42);
+insert into student (id, first_name, last_name, email, age) values (48, 'Mariele', 'Wonfor', 'mwonfor1b@google.co.uk', 67);
+insert into student (id, first_name, last_name, email, age) values (49, 'Meagan', 'Gateshill', 'mgateshill1c@google.pl', 97);
+insert into student (id, first_name, last_name, email, age) values (50, 'Vachel', 'Buttriss', 'vbuttriss1d@merriam-webster.com', 42);
+insert into student (id, first_name, last_name, email, age) values (51, 'Aguie', 'Aymer', 'aaymer1e@gravatar.com', 67);
+insert into student (id, first_name, last_name, email, age) values (52, 'Ekaterina', 'Ikin', 'eikin1f@netvibes.com', 81);
+insert into student (id, first_name, last_name, email, age) values (53, 'Leon', 'Flint', 'lflint1g@behance.net', 91);
+insert into student (id, first_name, last_name, email, age) values (54, 'Hasheem', 'Jordi', 'hjordi1h@cpanel.net', 91);
+insert into student (id, first_name, last_name, email, age) values (55, 'Justis', 'Fashion', 'jfashion1i@taobao.com', 93);
+insert into student (id, first_name, last_name, email, age) values (56, 'Carlie', 'Franzke', 'cfranzke1j@sun.com', 35);
+insert into student (id, first_name, last_name, email, age) values (57, 'Friederike', 'McBayne', 'fmcbayne1k@lycos.com', 92);
+insert into student (id, first_name, last_name, email, age) values (58, 'Ynes', 'Igoe', 'yigoe1l@flickr.com', 64);
+insert into student (id, first_name, last_name, email, age) values (59, 'Sammy', 'Bromont', 'sbromont1m@goodreads.com', 97);
+insert into student (id, first_name, last_name, email, age) values (60, 'Susana', 'Lewty', 'slewty1n@vinaora.com', 61);
+insert into student (id, first_name, last_name, email, age) values (61, 'Helyn', 'Stamper', 'hstamper1o@kickstarter.com', 73);
+insert into student (id, first_name, last_name, email, age) values (62, 'Roldan', 'Coping', 'rcoping1p@blogs.com', 41);
+insert into student (id, first_name, last_name, email, age) values (63, 'Allx', 'Ditty', 'aditty1q@vinaora.com', 43);
+insert into student (id, first_name, last_name, email, age) values (64, 'Malinde', 'William', 'mwilliam1r@bloomberg.com', 25);
+insert into student (id, first_name, last_name, email, age) values (65, 'Millard', 'O''Hannay', 'mohannay1s@yellowpages.com', 92);
+insert into student (id, first_name, last_name, email, age) values (66, 'Mile', 'Onge', 'monge1t@blogs.com', 78);
+insert into student (id, first_name, last_name, email, age) values (67, 'Gale', 'Brettoner', 'gbrettoner1u@wikimedia.org', 66);
+insert into student (id, first_name, last_name, email, age) values (68, 'Dex', 'Gouny', 'dgouny1v@cnbc.com', 98);
+insert into student (id, first_name, last_name, email, age) values (69, 'Merrick', 'Cockroft', 'mcockroft1w@patch.com', 90);
+insert into student (id, first_name, last_name, email, age) values (70, 'Zebedee', 'Jestico', 'zjestico1x@histats.com', 22);
+insert into student (id, first_name, last_name, email, age) values (71, 'Fredek', 'Greneham', 'fgreneham1y@github.com', 67);
+insert into student (id, first_name, last_name, email, age) values (72, 'Paddie', 'Rummings', 'prummings1z@soundcloud.com', 26);
+insert into student (id, first_name, last_name, email, age) values (73, 'Gerrard', 'Bownes', 'gbownes20@usgs.gov', 22);
+insert into student (id, first_name, last_name, email, age) values (74, 'Axel', 'Foyster', 'afoyster21@networksolutions.com', 54);
+insert into student (id, first_name, last_name, email, age) values (75, 'Kleon', 'De Filippi', 'kdefilippi22@ovh.net', 52);
+insert into student (id, first_name, last_name, email, age) values (76, 'Nathanial', 'Clemenceau', 'nclemenceau23@behance.net', 95);
+insert into student (id, first_name, last_name, email, age) values (77, 'Kevon', 'Straughan', 'kstraughan24@dailymotion.com', 35);
+insert into student (id, first_name, last_name, email, age) values (78, 'Harlen', 'Rubenov', 'hrubenov25@devhub.com', 65);
+insert into student (id, first_name, last_name, email, age) values (79, 'Cale', 'MacTrustie', 'cmactrustie26@go.com', 36);
+insert into student (id, first_name, last_name, email, age) values (80, 'Olive', 'Nelle', 'onelle27@weather.com', 96);
+insert into student (id, first_name, last_name, email, age) values (81, 'Griswold', 'Zack', 'gzack28@qq.com', 91);
+insert into student (id, first_name, last_name, email, age) values (82, 'Christy', 'Loseke', 'closeke29@google.com', 29);
+insert into student (id, first_name, last_name, email, age) values (83, 'Madlin', 'Maillard', 'mmaillard2a@amazon.co.jp', 67);
+insert into student (id, first_name, last_name, email, age) values (84, 'Wenona', 'Suttell', 'wsuttell2b@state.gov', 52);
+insert into student (id, first_name, last_name, email, age) values (85, 'Duke', 'Chittenden', 'dchittenden2c@is.gd', 21);
+insert into student (id, first_name, last_name, email, age) values (86, 'Calida', 'Biever', 'cbiever2d@telegraph.co.uk', 94);
+insert into student (id, first_name, last_name, email, age) values (87, 'Cindra', 'Puleque', 'cpuleque2e@nifty.com', 76);
+insert into student (id, first_name, last_name, email, age) values (88, 'Dante', 'Hanse', 'dhanse2f@imageshack.us', 39);
+insert into student (id, first_name, last_name, email, age) values (89, 'Hurley', 'Beachamp', 'hbeachamp2g@vkontakte.ru', 37);
+insert into student (id, first_name, last_name, email, age) values (90, 'Ennis', 'Coper', 'ecoper2h@desdev.cn', 94);
+insert into student (id, first_name, last_name, email, age) values (91, 'Abe', 'Roxbee', 'aroxbee2i@stanford.edu', 65);
+insert into student (id, first_name, last_name, email, age) values (92, 'Carmon', 'Salzburger', 'csalzburger2j@sina.com.cn', 53);
+insert into student (id, first_name, last_name, email, age) values (93, 'Carlita', 'McKelvie', 'cmckelvie2k@columbia.edu', 23);
+insert into student (id, first_name, last_name, email, age) values (94, 'Genia', 'Cumes', 'gcumes2l@elpais.com', 34);
+insert into student (id, first_name, last_name, email, age) values (95, 'Deedee', 'Byk', 'dbyk2m@tamu.edu', 60);
+insert into student (id, first_name, last_name, email, age) values (96, 'Karol', 'Camings', 'kcamings2n@elegantthemes.com', 99);
+insert into student (id, first_name, last_name, email, age) values (97, 'Regan', 'Gillice', 'rgillice2o@admin.ch', 72);
+insert into student (id, first_name, last_name, email, age) values (98, 'Editha', 'Lillistone', 'elillistone2p@cisco.com', 24);
+insert into student (id, first_name, last_name, email, age) values (99, 'Madalyn', 'Morrill', 'mmorrill2q@angelfire.com', 34);
+insert into student (id, first_name, last_name, email, age) values (100, 'Garrott', 'Zanre', 'gzanre2r@nhs.uk', 64);
+
+select* from student;
+
+insert into course (id, name, department) values (1, 'Hospitality Properties Trust', 'Accounting');
+insert into course (id, name, department) values (2, 'Chipotle Mexican Grill, Inc.', 'Sales');
+insert into course (id, name, department) values (3, 'SI Financial Group, Inc.', 'Accounting');
+insert into course (id, name, department) values (4, 'Grupo Financiero Santander Mexico S.A. B. de C.V.', 'Services');
+insert into course (id, name, department) values (5, 'Cerulean Pharma Inc.', 'Sales');
+insert into course (id, name, department) values (6, 'Sage Therapeutics, Inc.', 'Accounting');
+insert into course (id, name, department) values (7, 'Park Hotels & Resorts Inc.', 'Marketing');
+insert into course (id, name, department) values (8, 'SiteOne Landscape Supply, Inc.', 'Training');
+insert into course (id, name, department) values (9, 'Inovalon Holdings, Inc.', 'Training');
+insert into course (id, name, department) values (10, 'A. Schulman, Inc.', 'Support');
+insert into course (id, name, department) values (11, 'Rexford Industrial Realty, Inc.', 'Business Development');
+insert into course (id, name, department) values (12, 'Onvia, Inc.', 'Legal');
+insert into course (id, name, department) values (13, 'RiceBran Technologies', 'Support');
+insert into course (id, name, department) values (14, 'XBiotech Inc.', 'Marketing');
+insert into course (id, name, department) values (15, 'OneBeacon Insurance Group, Ltd.', 'Human Resources');
+insert into course (id, name, department) values (16, 'Tortoise Pipeline & Energy Fund, Inc.', 'Marketing');
+insert into course (id, name, department) values (17, 'QCR Holdings, Inc.', 'Legal');
+insert into course (id, name, department) values (18, 'Team, Inc.', 'Engineering');
+insert into course (id, name, department) values (19, 'DNB Financial Corp', 'Accounting');
+insert into course (id, name, department) values (20, 'Lennar Corporation', 'Engineering');
+insert into course (id, name, department) values (21, 'Nicholas Financial, Inc.', 'Sales');
+insert into course (id, name, department) values (22, 'Gabelli Dividend', 'Legal');
+insert into course (id, name, department) values (23, 'L.B. Foster Company', 'Business Development');
+insert into course (id, name, department) values (24, 'SVB Financial Group', 'Marketing');
+insert into course (id, name, department) values (25, 'FIRST REPUBLIC BANK', 'Services');
+insert into course (id, name, department) values (26, 'Sandy Spring Bancorp, Inc.', 'Product Management');
+insert into course (id, name, department) values (27, 'Brookline Bancorp, Inc.', 'Legal');
+insert into course (id, name, department) values (28, 'FlexShopper, Inc.', 'Support');
+insert into course (id, name, department) values (29, 'Synthetic Fixed-Income Securities, Inc.', 'Services');
+insert into course (id, name, department) values (30, 'Navios Maritime Acquisition Corporation', 'Support');
+insert into course (id, name, department) values (31, 'Selecta Biosciences, Inc.', 'Engineering');
+insert into course (id, name, department) values (32, 'BP p.l.c.', 'Business Development');
+insert into course (id, name, department) values (33, 'Enterprise Products Partners L.P.', 'Accounting');
+insert into course (id, name, department) values (34, 'Puma Biotechnology Inc', 'Legal');
+insert into course (id, name, department) values (35, 'Advent/Claymore Enhanced Growth & Income Fund', 'Human Resources');
+insert into course (id, name, department) values (36, 'Andina Acquisition Corp. II', 'Training');
+insert into course (id, name, department) values (37, 'Eaton Vance Enhanced Equity Income Fund II', 'Support');
+insert into course (id, name, department) values (38, 'BHP Billiton Limited', 'Services');
+insert into course (id, name, department) values (39, 'Tortoise Pipeline & Energy Fund, Inc.', 'Research and Development');
+insert into course (id, name, department) values (40, 'Newmont Mining Corporation', 'Marketing');
+insert into course (id, name, department) values (41, 'NETGEAR, Inc.', 'Human Resources');
+insert into course (id, name, department) values (42, 'Mercury General Corporation', 'Marketing');
+insert into course (id, name, department) values (43, 'PNM Resources, Inc. (Holding Co.)', 'Engineering');
+insert into course (id, name, department) values (44, 'Orthofix International N.V.', 'Product Management');
+insert into course (id, name, department) values (45, 'Pulse Biosciences, Inc', 'Sales');
+insert into course (id, name, department) values (46, 'Thomson Reuters Corp', 'Support');
+insert into course (id, name, department) values (47, 'GoPro, Inc.', 'Research and Development');
+insert into course (id, name, department) values (48, 'Natural Gas Services Group, Inc.', 'Marketing');
+insert into course (id, name, department) values (49, 'Fibria Celulose S.A.', 'Services');
+insert into course (id, name, department) values (50, 'LendingTree, Inc.', 'Research and Development');
+insert into course (id, name, department) values (51, 'Koninklijke Philips N.V.', 'Training');
+insert into course (id, name, department) values (52, 'Financial Institutions, Inc.', 'Sales');
+insert into course (id, name, department) values (53, 'Tile Shop Hldgs, Inc.', 'Human Resources');
+insert into course (id, name, department) values (54, 'J P Morgan Chase & Co', 'Product Management');
+insert into course (id, name, department) values (55, 'Insteel Industries, Inc.', 'Support');
+insert into course (id, name, department) values (56, 'Dynegy Inc.', 'Accounting');
+insert into course (id, name, department) values (57, 'KKR Income Opportunities Fund', 'Human Resources');
+insert into course (id, name, department) values (58, 'BofI Holding, Inc.', 'Training');
+insert into course (id, name, department) values (59, 'ON Semiconductor Corporation', 'Product Management');
+insert into course (id, name, department) values (60, 'Goldman Sachs MLP Income Opportunities Fund', 'Research and Development');
+insert into course (id, name, department) values (61, 'Martin Marietta Materials, Inc.', 'Accounting');
+insert into course (id, name, department) values (62, 'Scotts Miracle-Gro Company (The)', 'Legal');
+insert into course (id, name, department) values (63, 'IAC/InterActiveCorp', 'Sales');
+insert into course (id, name, department) values (64, 'Performant Financial Corporation', 'Marketing');
+insert into course (id, name, department) values (65, 'Merit Medical Systems, Inc.', 'Product Management');
+insert into course (id, name, department) values (66, 'Colliers International Group Inc. ', 'Business Development');
+insert into course (id, name, department) values (67, 'H&E Equipment Services, Inc.', 'Training');
+insert into course (id, name, department) values (68, 'American Financial Group, Inc.', 'Research and Development');
+insert into course (id, name, department) values (69, 'Liberty Broadband Corporation', 'Services');
+insert into course (id, name, department) values (70, 'Tenet Healthcare Corporation', 'Product Management');
+insert into course (id, name, department) values (71, 'Caesars Acquisition Company', 'Research and Development');
+insert into course (id, name, department) values (72, 'E.I. du Pont de Nemours and Company', 'Accounting');
+insert into course (id, name, department) values (73, 'U.S. Bancorp', 'Business Development');
+insert into course (id, name, department) values (74, 'Amarin Corporation plc', 'Sales');
+insert into course (id, name, department) values (75, 'Noah Holdings Ltd.', 'Human Resources');
+insert into course (id, name, department) values (76, 'Meredith Corporation', 'Marketing');
+insert into course (id, name, department) values (77, 'iRobot Corporation', 'Services');
+insert into course (id, name, department) values (78, 'Aluminum Corporation of China Limited', 'Support');
+insert into course (id, name, department) values (79, 'Natural Health Trends Corp.', 'Business Development');
+insert into course (id, name, department) values (80, 'HNI Corporation', 'Engineering');
+insert into course (id, name, department) values (81, 'Consolidated Edison Inc', 'Services');
+insert into course (id, name, department) values (82, 'Cohen & Steers MLP Income and Energy Opportunity Fund, Inc.', 'Research and Development');
+insert into course (id, name, department) values (83, 'WAVE Life Sciences Ltd.', 'Marketing');
+insert into course (id, name, department) values (84, 'Pioneer Municipal High Income Trust', 'Services');
+insert into course (id, name, department) values (85, 'Global X Millennials Thematic ETF', 'Research and Development');
+insert into course (id, name, department) values (86, 'Northfield Bancorp, Inc.', 'Marketing');
+insert into course (id, name, department) values (87, 'Radware Ltd.', 'Product Management');
+insert into course (id, name, department) values (88, 'Equity Bancshares, Inc.', 'Product Management');
+insert into course (id, name, department) values (89, 'Mack-Cali Realty Corporation', 'Business Development');
+insert into course (id, name, department) values (90, 'Kingstone Companies, Inc', 'Human Resources');
+insert into course (id, name, department) values (91, 'Statoil ASA', 'Marketing');
+insert into course (id, name, department) values (92, 'Energy XXI Gulf Coast, Inc.', 'Legal');
+insert into course (id, name, department) values (93, 'BioShares Biotechnology Clinical Trials Fund', 'Product Management');
+insert into course (id, name, department) values (94, 'T-Mobile US, Inc.', 'Business Development');
+insert into course (id, name, department) values (95, 'NetApp, Inc.', 'Training');
+insert into course (id, name, department) values (96, 'iShares MSCI Europe Financials Sector Index Fund', 'Research and Development');
+insert into course (id, name, department) values (97, 'Loncar Cancer Immunotherapy ETF', 'Human Resources');
+insert into course (id, name, department) values (98, 'Park-Ohio Holdings Corp.', 'Services');
+insert into course (id, name, department) values (99, 'The Intergroup Corporation', 'Research and Development');
+insert into course (id, name, department) values (100, 'Arch Capital Group Ltd.', 'Accounting');
+
+
+
+insert into student_id_card (id, student_id,  card_number) values (1, 76, 46878);
+insert into student_id_card (id, student_id,  card_number) values (2, 17, 705562);
+insert into student_id_card (id, student_id,  card_number) values (3, 69, 228216);
+insert into student_id_card (id, student_id,  card_number) values (4, 58, 144277);
+insert into student_id_card (id, student_id,  card_number) values (5, 11, 362933);
+insert into student_id_card (id, student_id,  card_number) values (6, 71, 157661);
+insert into student_id_card (id, student_id,  card_number) values (7, 85, 753690);
+insert into student_id_card (id, student_id,  card_number) values (8, 80, 292232);
+insert into student_id_card (id, student_id,  card_number) values (9, 36, 217531);
+insert into student_id_card (id, student_id,  card_number) values (10, 35, 582421);
+insert into student_id_card (id, student_id,  card_number) values (11, 3, 970053);
+insert into student_id_card (id, student_id,  card_number) values (12, 32, 661648);
+insert into student_id_card (id, student_id,  card_number) values (13, 62, 730216);
+insert into student_id_card (id, student_id,  card_number) values (14, 34, 936778);
+insert into student_id_card (id, student_id,  card_number) values (15, 99, 881003);
+insert into student_id_card (id, student_id,  card_number) values (16, 90, 977666);
+insert into student_id_card (id, student_id,  card_number) values (17, 40, 974348);
+insert into student_id_card (id, student_id,  card_number) values (18, 27, 640264);
+insert into student_id_card (id, student_id,  card_number) values (19, 10, 428614);
+insert into student_id_card (id, student_id,  card_number) values (20, 12, 492857);
+insert into student_id_card (id, student_id,  card_number) values (21, 67, 151932);
+insert into student_id_card (id, student_id,  card_number) values (22, 7, 944326);
+insert into student_id_card (id, student_id,  card_number) values (23, 44, 235909);
+insert into student_id_card (id, student_id,  card_number) values (24, 13, 894298);
+insert into student_id_card (id, student_id,  card_number) values (25, 88, 763543);
+insert into student_id_card (id, student_id,  card_number) values (26, 7, 431203);
+insert into student_id_card (id, student_id,  card_number) values (27, 92, 316633);
+insert into student_id_card (id, student_id,  card_number) values (28, 3, 259373);
+insert into student_id_card (id, student_id,  card_number) values (29, 6, 457991);
+insert into student_id_card (id, student_id,  card_number) values (30, 71, 313105);
+insert into student_id_card (id, student_id,  card_number) values (31, 99, 112686);
+insert into student_id_card (id, student_id,  card_number) values (32, 56, 357109);
+insert into student_id_card (id, student_id,  card_number) values (33, 97, 914994);
+insert into student_id_card (id, student_id,  card_number) values (34, 40, 256251);
+insert into student_id_card (id, student_id,  card_number) values (35, 12, 152992);
+insert into student_id_card (id, student_id,  card_number) values (36, 16, 538277);
+insert into student_id_card (id, student_id,  card_number) values (37, 39, 291808);
+insert into student_id_card (id, student_id,  card_number) values (38, 62, 221746);
+insert into student_id_card (id, student_id,  card_number) values (39, 45, 796993);
+insert into student_id_card (id, student_id,  card_number) values (40, 23, 891259);
+insert into student_id_card (id, student_id,  card_number) values (41, 85, 529227);
+insert into student_id_card (id, student_id,  card_number) values (42, 66, 634238);
+insert into student_id_card (id, student_id,  card_number) values (43, 6, 813058);
+insert into student_id_card (id, student_id,  card_number) values (44, 90, 886153);
+insert into student_id_card (id, student_id,  card_number) values (45, 40, 410925);
+insert into student_id_card (id, student_id,  card_number) values (46, 85, 135878);
+insert into student_id_card (id, student_id,  card_number) values (47, 58, 103719);
+insert into student_id_card (id, student_id,  card_number) values (48, 89, 550177);
+insert into student_id_card (id, student_id,  card_number) values (49, 34, 178647);
+insert into student_id_card (id, student_id,  card_number) values (50, 83, 104963);
+insert into student_id_card (id, student_id,  card_number) values (51, 3, 559775);
+insert into student_id_card (id, student_id,  card_number) values (52, 65, 712100);
+insert into student_id_card (id, student_id,  card_number) values (53, 56, 826406);
+insert into student_id_card (id, student_id,  card_number) values (54, 95, 510600);
+insert into student_id_card (id, student_id,  card_number) values (55, 51, 187759);
+insert into student_id_card (id, student_id,  card_number) values (56, 33, 897912);
+insert into student_id_card (id, student_id,  card_number) values (57, 78, 589725);
+insert into student_id_card (id, student_id,  card_number) values (58, 14, 3123);
+insert into student_id_card (id, student_id,  card_number) values (59, 44, 566669);
+insert into student_id_card (id, student_id,  card_number) values (60, 29, 713345);
+insert into student_id_card (id, student_id,  card_number) values (61, 54, 494172);
+insert into student_id_card (id, student_id,  card_number) values (62, 88, 510034);
+insert into student_id_card (id, student_id,  card_number) values (63, 18, 213055);
+insert into student_id_card (id, student_id,  card_number) values (64, 30, 118980);
+insert into student_id_card (id, student_id,  card_number) values (65, 7, 819280);
+insert into student_id_card (id, student_id,  card_number) values (66, 28, 787674);
+insert into student_id_card (id, student_id,  card_number) values (67, 44, 48477);
+insert into student_id_card (id, student_id,  card_number) values (68, 63, 47978);
+insert into student_id_card (id, student_id,  card_number) values (69, 84, 840419);
+insert into student_id_card (id, student_id,  card_number) values (70, 43, 148913);
+insert into student_id_card (id, student_id,  card_number) values (71, 23, 132969);
+insert into student_id_card (id, student_id,  card_number) values (72, 74, 330817);
+insert into student_id_card (id, student_id,  card_number) values (73, 91, 881204);
+insert into student_id_card (id, student_id,  card_number) values (74, 38, 298996);
+insert into student_id_card (id, student_id,  card_number) values (75, 86, 322921);
+insert into student_id_card (id, student_id,  card_number) values (76, 50, 789233);
+insert into student_id_card (id, student_id,  card_number) values (77, 33, 365340);
+insert into student_id_card (id, student_id,  card_number) values (78, 82, 228326);
+insert into student_id_card (id, student_id,  card_number) values (79, 59, 137651);
+insert into student_id_card (id, student_id,  card_number) values (80, 14, 802187);
+insert into student_id_card (id, student_id,  card_number) values (81, 35, 368230);
+insert into student_id_card (id, student_id,  card_number) values (82, 55, 481730);
+insert into student_id_card (id, student_id,  card_number) values (83, 51, 119470);
+insert into student_id_card (id, student_id,  card_number) values (84, 87, 455690);
+insert into student_id_card (id, student_id,  card_number) values (85, 12, 385444);
+insert into student_id_card (id, student_id,  card_number) values (86, 28, 32336);
+insert into student_id_card (id, student_id,  card_number) values (87, 11, 786034);
+insert into student_id_card (id, student_id,  card_number) values (88, 73, 480382);
+insert into student_id_card (id, student_id,  card_number) values (89, 94, 534519);
+insert into student_id_card (id, student_id,  card_number) values (90, 68, 581651);
+insert into student_id_card (id, student_id,  card_number) values (91, 79, 794643);
+insert into student_id_card (id, student_id,  card_number) values (92, 90, 27002);
+insert into student_id_card (id, student_id,  card_number) values (93, 28, 37561);
+insert into student_id_card (id, student_id,  card_number) values (94, 63, 155348);
+insert into student_id_card (id, student_id,  card_number) values (95, 68, 278786);
+insert into student_id_card (id, student_id,  card_number) values (96, 35, 617928);
+insert into student_id_card (id, student_id,  card_number) values (97, 52, 592843);
+insert into student_id_card (id, student_id,  card_number) values (98, 12, 973504);
+insert into student_id_card (id, student_id,  card_number) values (99, 64, 658589);
+insert into student_id_card (id, student_id,  card_number) values (100, 37, 683092);
+
+
+select card_number,created_at from student_id_card
+ join enrolment on  student_id_card.student_id =enrolment.student_id;
+
+select email from student where id<10
+union
+select book_name from book where id<10;
+
+-- intersect
+
+#  select email from student INTERSECT select student_id from student_id_card
+#  order by id asc;
+
+#  select  last_name from student where id<10
+# intersect
+# select created_at from book where id<10 ;
+
+
+
+select id from student where student.id in (select student_id from student_id_card where student_id<10);
+
+-- sa sea afiseze  studentii in ordine crescatoare a numarului de  inscrieri
+
+SELECT student.first_name ,count(*) as number
+FROM student
+JOIN enrolment ON student.id = enrolment.student_id
+group by student.first_name
+order  by number desc
+ 
+
+-- sa se afiseze toti studentii care au intre 20 si 30 de ani care participa la minim doua cursuri
+SELECT student.first_name ,count(*) as number
+FROM student
+JOIN enrolment ON student.id = enrolment.student_id
+
+where student.age between 20 and 30 and enrolment.course_id>=2
+group by student.first_name;
+
+-- sa sea afiseze  studentii in ordine crescatoare a numarului de  inscrieri
+SELECT student.first_name ,count(*) as number
+FROM student
+JOIN enrolment ON student.id = enrolment.student_id
+group by student.first_name
+order  by number desc;
