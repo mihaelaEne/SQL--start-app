@@ -813,6 +813,10 @@ insert into order_details (id, order_id, product_id, price, sku, quantity) value
 insert into order_details (id, order_id, product_id, price, sku, quantity) values (18, 18, 18, 4166, 100, 16);
 insert into order_details (id, order_id, product_id, price, sku, quantity) values (19, 19, 19, 1958, 46, 17);
 
+
+--afisarea det despre produs (nume, pret, numele optiunii si categoria)
+-- cu id ul 1, 
+--fol left ac sa leg products cu product_option, options , product_categories si categories
 SELECT p.name, p.price, p.descriptions, o.option_name, c.name AS category
 FROM products p
 LEFT JOIN product_option po ON p.id = po.product_id
@@ -821,18 +825,22 @@ LEFT JOIN product_categories pc ON p.id = pc.product_id
 LEFT JOIN categories c ON pc.category_id = c.id
 WHERE p.id = 1;
 
+--afisarea totalului de ch pentru client, dupa grupez totul numele clientului
 SELECT c.full_name, SUM(o.ammount) AS total_cheltuieli
 FROM customers c
 LEFT JOIN orders o ON c.id = o.customer_id
 GROUP BY c.full_name;
 
 
+-- selectez nume si pret pt un produs unde exista stock si le afisez descr in functie de pret
 SELECT name, price
 FROM products
 WHERE stock > 0
 ORDER BY price DESC;
 
 
+-- imi afiseaza numele categoriilor si nr de produse care sunt "vandute" in categorie
+-- rez pe care le am le sortez descr dupa nr de produse vandute 
 SELECT c.name AS category, COUNT(od.product_id) AS numar_produse_vandute
 FROM categories c
 LEFT JOIN product_categories pc ON c.id = pc.category_id
@@ -840,12 +848,15 @@ LEFT JOIN order_details od ON pc.product_id = od.product_id
 GROUP BY c.name
 ORDER BY numar_produse_vandute DESC;
 
+
+-- afisarea id ului comenzii, numele clientului, data comenzii pt clientii din USA 
 SELECT o.id, c.full_name, o.order_date, o.order_status
 FROM orders o
 INNER JOIN customers c ON o.customer_id = c.id
 WHERE c.country = 'USA';
 
 
+--afisarea numelu clientului care a cumparat produse din categ diferite 
 SELECT c.full_name, COUNT(DISTINCT pc.category_id) AS numar_categorii_cumparate
 FROM customers c
 LEFT JOIN orders o ON c.id = o.customer_id
@@ -855,19 +866,22 @@ GROUP BY c.full_name
 HAVING numar_categorii_cumparate > 1;
 
 
+-- afisarea (top 10) numelui si stocului care au cel mai mic stoc
 SELECT name, stock
 FROM products
 ORDER BY stock ASC
 LIMIT 10;
 
 
-
+-- afisarea nr comenzilor pt produs, si mi le pune in ordine 
 SELECT p.name, COUNT(od.product_id) AS numar_comenzi
 FROM products p
 LEFT JOIN order_details od ON p.id = od.product_id
 GROUP BY p.name
 ORDER BY numar_comenzi DESC;
 
+
+-- afisarea sumei totale de ch  pt client in parte 
 SELECT c.full_name, SUM(o.ammount) AS suma_totala
 FROM customers c
 LEFT JOIN orders o ON c.id = o.customer_id
@@ -875,6 +889,8 @@ GROUP BY c.full_name
 ORDER BY suma_totala DESC
 LIMIT 10;
 
+
+-- calculareea nr mediu de produse comandare si imi afiseaza clientii 
 SELECT c.full_name, AVG(od.quantity) AS numar_mediu_produse_comandate
 FROM customers c
 LEFT JOIN orders o ON c.id = o.customer_id
@@ -882,7 +898,7 @@ LEFT JOIN order_details od ON o.id = od.order_id
 GROUP BY c.full_name
 ORDER BY numar_mediu_produse_comandate DESC;
 
-
+-- top 10 comenzi + nume  al clientului+ detalii
 SELECT o.id, c.full_name AS nume_client, p.name AS nume_produs, od.quantity, od.price, o.order_date, o.order_status
 FROM orders o
 LEFT JOIN customers c ON o.customer_id = c.id
@@ -891,7 +907,7 @@ LEFT JOIN products p ON od.product_id = p.id
 ORDER BY o.order_date DESC
 LIMIT 10;
 
-
+-- calcularea nr de comenzi pt fiecare produs in parte si le afiseaza in ordine crescatoare 
 SELECT p.name, COUNT(od.product_id) AS numar_comenzi
 FROM products p
 LEFT JOIN order_details od ON p.id = od.product_id
