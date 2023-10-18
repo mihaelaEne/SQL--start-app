@@ -380,13 +380,15 @@ group by student.first_name
 order  by number desc
  
 
--- sa se afiseze toti studentii care au intre 20 si 30 de ani care participa la minim doua cursuri
-SELECT student.first_name ,count(*) as number
-FROM student
-JOIN enrolment ON student.id = enrolment.student_id
 
-where student.age between 20 and 30 and enrolment.course_id>=2
-group by student.first_name;
+-- sa se afiseze toti studentii care au intre 20 si 30 de ani care participa la minim doua cursuri
+SELECT student.first_name, COUNT(enrolment.student_id) AS "number"
+FROM student
+INNER JOIN enrolment ON student.id = enrolment.student_id
+WHERE student.age BETWEEN 20 AND 30
+GROUP BY student.first_name
+HAVING COUNT(enrolment.student_id) >= 2;
+
 
 -- sa sea afiseze  studentii in ordine crescatoare a numarului de  inscrieri
 SELECT student.first_name ,count(*) as number
@@ -394,3 +396,21 @@ FROM student
 JOIN enrolment ON student.id = enrolment.student_id
 group by student.first_name
 order  by number desc;
+
+
+-- sa se afiseze studentii care au id ul par si care sunt inscrisi la un singur curs
+SELECT student.first_name, COUNT(enrolment.student_id) AS "number"
+FROM student
+INNER JOIN enrolment ON student.id = enrolment.student_id
+WHERE student.id %2=0
+GROUP BY student.first_name
+HAVING COUNT(enrolment.student_id) =1;
+
+-- sa se afiseze doar studentii care au mail ul mai mic  de 20 de carctere
+
+select first_name from student
+where char_length(email)<20;
+
+-- sa se afsieze toate cartile care au data de aparii=tie dupa anul 2023
+SELECT book_name from book where created_at between '2023-05-10' and '2023-08-10';
+
