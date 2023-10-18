@@ -1,0 +1,899 @@
+create database online_shop_db;
+use online_shop_db;
+
+create table products(
+    id integer primary key ,
+    sku varchar(255),
+    name varchar(255),
+    price integer,
+    weight integer,
+    descriptions varchar(2555),
+    category varchar(255),
+    create_date date,
+    stock integer
+);
+
+create table customers(
+    id integer primary key ,
+    email varchar(255),
+    passwors varchar(255),
+    full_name varchar(255),
+    billing_address varchar(255),
+    default_shipping_address varchar(255),
+    country varchar(255),
+    phone varchar(255)
+);
+
+
+create table orders(
+    id integer primary key ,
+    customer_id integer,
+    ammount integer,
+    shipping_adress varchar(255),
+    order_adress varchar(255),
+    order_email varchar(100),
+    order_date date,
+    order_status varchar(20),
+    foreign key (customer_id) references customers (id)
+);
+
+create table categories (
+    id integer primary key,
+    name varchar(100),
+    description varchar(100)
+);
+
+
+create table option(
+    id integer primary key,
+    option_name varchar(100)
+);
+
+create table product_option(
+    id integer primary key,
+    option_id integer,
+    product_id integer,
+   foreign key (option_id) references option (id),
+   foreign key (product_id) references products (id)
+
+);
+
+
+create table product_categories(
+    id integer primary key,
+    product_id integer,
+    category_id integer,
+   foreign key (product_id) references products (id),
+    foreign key (category_id) references categories (id)
+
+);
+
+create table order_details(
+     id integer primary key,
+     order_id integer,
+     product_id integer,
+    price integer,
+    sku integer,
+    quantity integer,
+    foreign key (order_id) references orders (id),
+     foreign key (product_id) references products (id)
+
+);
+
+
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (1, 77678, 'Kristian', 2369, 1, 'Leshukonskoye Airport', 'C - Plus, Orange', '2023-05-27', 17507);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (2, 61017, 'Alexandro', 2336, 17, 'Portland Hillsboro Airport', 'Flour - Corn, Fine', '2023-09-04', 12924);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (3, 7794, 'Yetty', 93, 4, 'Inishmore Aerodrome', 'Wine - Cava Aria Estate Brut', '2022-10-26', 11482);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (4, 29905, 'Stevena', 1029, 18, 'Oakland County International Airport', 'Cake - Mini Potato Pancake', '2022-11-03', 1957);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (5, 80547, 'Frances', 3162, 3, 'La Plata Airport', 'Tea - Apple Green Tea', '2023-05-28', 464);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (6, 89404, 'Stavro', 2964, 8, 'Boun Neau Airport', 'Guinea Fowl', '2022-12-18', 16795);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (7, 60077, 'Vilhelmina', 2734, 18, 'Durham Downs Airport', 'Flour - Masa De Harina Mexican', '2022-12-05', 6001);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (8, 76193, 'Shaina', 2609, 1, 'Luzamba Airport', 'Cake - Bande Of Fruit', '2023-04-09', 4797);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (9, 21126, 'Dyanna', 8378, 1, 'Yasawa Island Airport', 'Soup - Campbells Chili', '2023-02-11', 7214);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (10, 33238, 'Damien', 753, 7, 'Teniente Rodolfo Marsh Martin Base', 'Cup - 3.5oz, Foam', '2022-11-15', 2743);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (11, 10556, 'Sloane', 6726, 19, 'Boeing Field King County International Airport', 'Nut - Walnut, Pieces', '2023-01-17', 5899);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (12, 11293, 'Dannel', 7411, 14, 'Ljubljana Jože Pučnik Airport', 'Wine - White, Chardonnay', '2023-05-10', 12593);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (13, 65581, 'Ingamar', 3486, 1, 'Kittilä Airport', 'Muffin Mix - Oatmeal', '2022-11-11', 494);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (14, 23542, 'Fancy', 9895, 3, 'Jingdezhen Airport', 'Liquid Aminios Acid - Braggs', '2022-12-31', 11943);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (15, 66281, 'Analiese', 4157, 6, 'Takaroa Airport', 'Lamb - Rack', '2023-07-26', 11712);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (16, 39629, 'Locke', 3427, 1, 'Dadu West Airport', 'Fish - Artic Char, Cold Smoked', '2022-12-26', 7240);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (17, 30846, 'Hailee', 4815, 3, 'Jiujiang Lushan Airport', 'Beer - Blue', '2023-08-10', 8870);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (18, 66909, 'Ernaline', 8941, 10, 'Kauehi Airport', 'Capon - Breast, Double, Wing On', '2023-01-18', 19670);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (19, 34930, 'Nial', 298, 2, 'Ronneby Airport', 'Wine - Beringer Founders Estate', '2022-12-27', 13564);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (20, 26561, 'Melva', 6871, 3, 'Bateen Airport', 'Chick Peas - Canned', '2023-05-05', 10811);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (21, 1321, 'Prince', 7840, 10, 'Resolute Bay Airport', 'Pasta - Rotini, Dry', '2022-11-15', 14280);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (22, 92857, 'Rina', 2077, 3, 'Hornepayne Municipal Airport', 'Lid - 3oz Med Rec', '2023-08-15', 10322);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (23, 27601, 'Bartolomeo', 5793, 20, 'Sachs Harbour (David Nasogaluak Jr. Saaryuaq) Airport', 'Cassis', '2023-01-27', 9311);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (24, 88357, 'Annetta', 183, 19, 'Kavanayen Airport', 'Cookie Dough - Double', '2023-01-25', 10513);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (25, 63352, 'Marvin', 1466, 12, 'Melbourne International Airport', 'Cut Wakame - Hanawakaba', '2023-01-04', 2172);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (26, 59281, 'Adelind', 9495, 18, 'Chefornak Airport', 'Hinge W Undercut', '2023-09-24', 7734);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (27, 38222, 'Rochella', 8363, 2, 'Simmons Army Air Field', 'Mustard - Dijon', '2023-04-29', 10977);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (28, 21398, 'Sally', 3787, 6, 'Aarhus Airport', 'Sauce - Salsa', '2023-04-20', 19212);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (29, 47411, 'Carol-jean', 3711, 14, 'Abeche Airport', 'Broom - Push', '2023-04-26', 13332);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (30, 49708, 'Lalo', 2074, 14, 'Toyama Airport', 'Sprite - 355 Ml', '2023-05-18', 9943);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (31, 3309, 'Rorie', 7681, 10, 'Konduz Airport', 'Garlic - Peeled', '2023-05-07', 6601);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (32, 37626, 'Ingeborg', 2008, 19, 'Brak Airport', 'Jameson Irish Whiskey', '2023-01-03', 18865);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (33, 92824, 'Munmro', 7031, 7, 'Kirkuk Air Base', 'Clams - Canned', '2022-11-18', 67);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (34, 76929, 'Arlina', 8210, 2, 'Tarbes-Lourdes-Pyrénées Airport', 'Fiddlehead - Frozen', '2023-04-28', 6773);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (35, 99556, 'Starla', 1382, 16, 'Grenfell Airport', 'Pears - Bartlett', '2022-12-21', 1844);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (36, 24890, 'Pooh', 1087, 4, 'Pope Field', 'Spic And Span All Purpose', '2023-07-02', 14493);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (37, 8402, 'Carver', 6371, 9, 'Port Keats Airport', 'Chicken - Bones', '2023-06-16', 4547);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (38, 28774, 'Carleton', 3147, 6, 'Valcheta Airport', 'Appetizer - Mini Egg Roll, Shrimp', '2023-07-27', 7932);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (39, 34947, 'Harvey', 6944, 11, 'Leinster Airport', 'Transfer Sheets', '2022-11-08', 19539);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (40, 5449, 'Robyn', 2334, 2, 'Estadual Arthur Siqueira Airport', 'Dome Lid Clear P92008h', '2023-08-25', 18144);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (41, 89149, 'Leonardo', 2754, 14, 'Linz Hörsching Airport', 'Dawn Professionl Pot And Pan', '2023-10-04', 6462);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (42, 29086, 'Si', 1640, 5, 'Los Menucos Airport', 'Chocolate - Mi - Amere Semi', '2023-06-04', 3320);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (43, 44136, 'Adolph', 2339, 9, 'Alferez FAP Alfredo Vladimir Sara Bauer Airport', 'Longos - Penne With Pesto', '2023-03-04', 13817);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (44, 16130, 'Chad', 3364, 16, 'Ellamar Seaplane Base', 'Carbonated Water - Strawberry', '2022-11-21', 6262);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (45, 93730, 'Burnard', 5119, 9, 'Arak Airport', 'Tart - Butter Plain Squares', '2023-10-09', 13693);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (46, 68226, 'Drake', 8391, 4, 'DLF Airport', 'Cherries - Maraschino,jar', '2023-07-26', 12368);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (47, 81253, 'Laney', 5500, 2, 'Eurico de Aguiar Salles Airport', 'Chevere Logs', '2023-01-19', 18109);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (48, 42013, 'Gabriella', 4874, 7, 'Baidoa Airport', 'Cabbage - Green', '2023-03-12', 15907);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (49, 33277, 'Tiena', 9414, 17, 'Aramac Airport', 'Raisin - Golden', '2022-12-26', 2849);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (50, 70581, 'Seamus', 4967, 5, 'Clinton County Airport', 'Taro Leaves', '2023-03-18', 6882);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (51, 10044, 'Abie', 4700, 8, 'Edwards Air Force Base', 'Shrimp - 100 / 200 Cold Water', '2023-05-06', 9368);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (52, 9327, 'Meredithe', 6586, 9, 'Praslin Airport', 'Veal - Ground', '2023-09-12', 18484);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (53, 11949, 'Shane', 6310, 19, 'Port Stanley Airport', 'Pastry - Apple Large', '2023-07-23', 16492);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (54, 10167, 'Maison', 7638, 4, 'Richard I Bong Airport', 'Rye Special Old', '2022-12-06', 3127);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (55, 16137, 'Muffin', 9408, 8, 'Paamiut Airport', 'Cheese - Bakers Cream Cheese', '2023-01-12', 9935);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (56, 4398, 'Ingelbert', 6111, 10, 'Shreveport Downtown Airport', 'Potatoes - Parissienne', '2023-07-27', 12626);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (57, 83154, 'Jasmin', 1397, 16, 'Kenema Airport', 'Dill Weed - Dry', '2023-03-18', 11742);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (58, 83173, 'Kira', 4855, 3, 'Charleville-Mézières Airport', 'Pork - Back, Short Cut, Boneless', '2023-05-27', 10640);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (59, 53811, 'Kay', 6208, 8, 'Cowarie Airport', 'Sultanas', '2023-09-29', 11459);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (60, 73094, 'Xerxes', 9477, 6, 'Polk Army Air Field', 'Lemonade - Pineapple Passion', '2023-08-10', 1255);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (61, 21495, 'Philipa', 5912, 8, 'Sana''a International Airport', 'Wine - Champagne Brut Veuve', '2022-12-13', 17299);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (62, 7138, 'Harley', 641, 13, 'Lake Macquarie Airport', 'Sour Cream', '2023-02-14', 12273);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (63, 64134, 'Aloise', 5808, 13, 'Angoche Airport', 'Nestea - Ice Tea, Diet', '2023-09-25', 18708);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (64, 18104, 'Joyan', 9738, 19, 'Mao Airport', 'Chicken - Leg, Fresh', '2023-04-11', 7609);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (65, 57616, 'Josiah', 897, 15, 'Peawanuck Airport', 'Octopus', '2023-09-04', 4501);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (66, 79940, 'Alejandro', 1072, 8, 'Tommy Kochon Airport', 'Clam - Cherrystone', '2023-05-08', 18934);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (67, 31142, 'Jaclyn', 1775, 2, 'Bialla Airport', 'Wine - Riesling Dr. Pauly', '2023-05-11', 15524);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (68, 8330, 'Dan', 7647, 15, 'Treinta y Tres Airport', 'Spice - Pepper Portions', '2023-01-23', 12610);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (69, 94194, 'Patton', 1158, 3, 'Mechanics Bay Heliport', 'Durian Fruit', '2023-10-02', 18484);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (70, 21950, 'Kerrin', 5587, 4, 'Mykolaiv International Airport', 'Celery', '2023-07-01', 16684);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (71, 19860, 'Wesley', 6280, 15, 'Zhigansk Airport', 'Marjoram - Dried, Rubbed', '2023-05-14', 18042);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (72, 55219, 'Amery', 7230, 9, 'Efogi Airport', 'Bar Mix - Lemon', '2023-06-02', 19453);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (73, 83949, 'Kynthia', 2505, 10, 'Sembach Air Base', 'Chicken - Diced, Cooked', '2023-06-30', 7866);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (74, 40356, 'Kort', 5994, 2, 'Lubang Airport', 'Tea - Herbal Orange Spice', '2023-01-17', 11636);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (75, 1091, 'Sonja', 1831, 12, 'Sri Guru Ram Dass Jee International Airport', 'Wine - Ruffino Chianti Classico', '2023-01-06', 14125);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (76, 56744, 'Dilly', 9403, 20, 'Joslin Field Magic Valley Regional Airport', 'Wheat - Soft Kernal Of Wheat', '2023-01-14', 5712);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (77, 39132, 'Bonnie', 2921, 15, 'General E. Mosconi Airport', 'Oil - Safflower', '2023-01-14', 1017);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (78, 11806, 'Sherm', 3928, 14, 'Port Bailey Seaplane Base', 'Pork - Bones', '2023-04-24', 13332);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (79, 75372, 'Brandi', 3513, 3, 'Gilgit Airport', 'Cake - Bande Of Fruit', '2023-06-17', 1832);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (80, 38261, 'Bea', 4908, 11, 'Diego Aracena Airport', 'Muffin Mix - Banana Nut', '2023-10-17', 7596);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (81, 71098, 'Queenie', 9363, 14, 'Naples Municipal Airport', 'Muffin - Carrot Individual Wrap', '2023-09-30', 13213);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (82, 70437, 'Aura', 2636, 10, 'Fort Simpson Airport', 'Coffee - Flavoured', '2022-11-03', 16659);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (83, 39027, 'Paul', 1351, 14, 'Kuujjuarapik Airport', 'Trout Rainbow Whole', '2023-02-09', 11698);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (84, 97557, 'Jarrett', 6786, 12, 'Bishop International Airport', 'Chocolate - White', '2023-08-01', 4362);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (85, 97934, 'Misha', 1915, 3, 'Betioky Airport', 'Juice - Tomato, 10 Oz', '2023-04-02', 11169);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (86, 42573, 'Leonore', 6735, 7, 'Sultan Ismail Petra Airport', 'Wine - White, Chardonnay', '2023-08-10', 3822);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (87, 26756, 'Gretchen', 9931, 18, 'Iran Shahr Airport', 'Sauce - White, Mix', '2023-02-12', 11997);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (88, 50837, 'Pattin', 7242, 6, 'Belmullet Aerodrome', 'Flour - Bread', '2023-03-30', 874);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (89, 1939, 'Veronica', 2857, 7, 'Stroud Municipal Airport', 'White Baguette', '2023-08-21', 6353);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (90, 61038, 'Cherin', 3819, 9, 'Mwanza Airport', 'Jam - Raspberry,jar', '2023-06-24', 4902);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (91, 94662, 'Shaylyn', 4314, 11, 'Walvis Bay Airport', 'Cookie - Oreo 100x2', '2023-09-03', 14115);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (92, 69350, 'Hubie', 3006, 10, 'Gaya Airport', 'Eggplant - Baby', '2023-02-12', 16455);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (93, 64188, 'Chadwick', 7543, 18, 'C David Campbell Field Corsicana Municipal Airport', 'Soup - Campbells Chili', '2023-04-08', 320);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (94, 32208, 'Maggi', 4418, 12, 'Kochi Airport (高知空港)', 'Ecolab - Balanced Fusion', '2023-05-03', 7586);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (95, 11340, 'Callean', 8885, 17, 'Daloa Airport', 'Syrup - Chocolate', '2022-11-18', 16479);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (96, 91362, 'Corissa', 7642, 10, 'Gulfport Biloxi International Airport', 'Snapple Raspberry Tea', '2022-12-01', 15925);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (97, 45738, 'Rhody', 9311, 3, 'Dongola Airport', 'Tuna - Fresh', '2023-04-09', 18028);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (98, 48778, 'Vivyanne', 5844, 10, 'Bezmer Air Base', 'Vacuum Bags 12x16', '2023-02-06', 17602);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (99, 85610, 'Karola', 1120, 18, 'Mafra Airport', 'Daikon Radish', '2023-06-13', 2114);
+insert into products (id, sku, name, price, weight, descriptions, category, create_date, stock) values (100, 17207, 'Felicle', 3916, 19, 'Lloydminster Airport', 'Wine - Magnotta - Red, Baco', '2023-06-18', 11770);
+
+
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (1, 'kbamlett0@slate.com', 'lZ5?n(rjVo|TX', 'Kennett Bamlett', 'Apt 1405', 'Apt 1567', 'China', '470-954-5537');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (2, 'jtuminelli1@bing.com', 'aU1?`(J.NH0D($7N', 'Joey Tuminelli', 'Suite 18', 'Apt 1454', 'France', '736-221-9243');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (3, 'cgallamore2@wunderground.com', 'sS6&.O.6''Qq0', 'Charmaine Gallamore', 'Apt 267', 'PO Box 70477', 'Morocco', '555-859-5992');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (4, 'bdaventry3@friendfeed.com', 'pW8}9deS8', 'Beverly Daventry', 'Apt 1788', 'Apt 1992', 'China', '514-129-8124');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (5, 'nburgoyne4@aol.com', 'xN6.#oAC"', 'Nikola Burgoyne', 'Suite 27', 'PO Box 4558', 'Mexico', '669-819-4572');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (6, 'gskeates5@tamu.edu', 'tN6+Z,ws3m', 'Giacopo Skeates', '17th Floor', 'Room 367', 'China', '373-717-7320');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (7, 'lsparshatt6@scribd.com', 'yZ5$7?9%a?!&MC_', 'Linell Sparshatt', '11th Floor', 'PO Box 71693', 'Brazil', '992-135-5113');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (8, 'amccreery7@ft.com', 'qV5!TeBm?', 'Antonietta McCreery', 'PO Box 62692', 'Apt 1485', 'Serbia', '947-455-9026');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (9, 'fsyvret8@weibo.com', 'iX7_v1RJv', 'Fionna Syvret', '16th Floor', 'Suite 61', 'China', '263-827-6989');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (10, 'csillwood9@zdnet.com', 'eT5=5}`$9', 'Constantino Sillwood', 'Apt 959', 'Room 261', 'Philippines', '649-911-9618');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (11, 'tlayburna@wiley.com', 'oR5"/H/B', 'Tim Layburn', '9th Floor', 'Room 1542', 'Brazil', '750-217-5980');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (12, 'mmcrobbb@sfgate.com', 'lA3{P,BRU7<c,', 'Meggy McRobb', 'Suite 32', 'Apt 940', 'Indonesia', '833-442-5908');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (13, 'vkillockc@amazon.co.jp', 'qN6#nCq?`YGnH', 'Vivyanne Killock', 'Suite 96', '7th Floor', 'Portugal', '722-467-5492');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (14, 'hcorsed@mtv.com', 'mI7{rEnJ3*5(', 'Henriette Corse', 'Room 467', 'Room 1912', 'Russia', '405-495-4052');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (15, 'acurlesse@i2i.jp', 'aR8_hBg''w', 'Aloisia Curless', 'Room 891', 'Room 1703', 'Japan', '318-414-8128');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (16, 'fclipstonf@berkeley.edu', 'aC2!k.0N', 'Freddi Clipston', 'Apt 1910', 'Room 71', 'New Zealand', '317-921-7037');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (17, 'mshealg@163.com', 'hU9)md%3H', 'Madeleine Sheal', 'Apt 1324', 'Room 1492', 'Indonesia', '799-843-7572');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (18, 'cparadiseh@bbc.co.uk', 'jW6}jbWZZaQB', 'Claudianus Paradise', 'PO Box 57719', 'PO Box 98002', 'Eritrea', '971-632-4677');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (19, 'blivocki@loc.gov', 'sQ4}(XuD', 'Broderick Livock', '19th Floor', 'Apt 385', 'China', '556-729-3226');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (20, 'tcongdonj@tinypic.com', 'lM4<A}}b&5q7d', 'Tersina Congdon', '2nd Floor', 'Room 198', 'China', '678-515-5918');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (21, 'kbroyk@mozilla.org', 'zS6({yAgD)F', 'Karyl Broy', 'PO Box 70850', 'PO Box 87546', 'Burundi', '774-570-0923');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (22, 'fleckiel@earthlink.net', 'rQ4(H\30u*?/X''J6', 'Flint Leckie', 'Apt 1241', 'Apt 1535', 'China', '685-869-3422');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (23, 'mpauleitm@cdc.gov', 'gD4\PX#A!}}|&s', 'Mack Pauleit', 'PO Box 7347', '1st Floor', 'Cuba', '765-907-0713');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (24, 'sphythonn@archive.org', 'oQ2,s?''''7{ZO6,', 'Susie Phython', 'PO Box 61006', 'Room 1476', 'Mexico', '683-762-0432');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (25, 'kcoadyo@dailymail.co.uk', 'sY6)''xogUkVT\T', 'Keriann Coady', 'Suite 89', '15th Floor', 'Benin', '265-966-7513');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (26, 'klaunchburyp@pen.io', 'xY3_f*`0U_Vj+}#', 'Karalynn Launchbury', 'Apt 23', 'PO Box 93539', 'France', '637-874-6192');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (27, 'rwoehlerq@marketwatch.com', 'nU3{\Lrb4p', 'Rosalind Woehler', 'PO Box 8652', 'Suite 49', 'Russia', '638-115-5256');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (28, 'lflescherr@smugmug.com', 'xS0"k"/HJ2|e|MQ9', 'Liana Flescher', 'Apt 1113', '5th Floor', 'Indonesia', '468-826-2159');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (29, 'bswaless@google.fr', 'fA6=CON"?', 'Babb Swales', 'Suite 27', '12th Floor', 'China', '982-664-5357');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (30, 'clayzellt@artisteer.com', 'mC9(H~T!Tyh%', 'Catina Layzell', 'Room 1219', 'Room 1003', 'China', '512-962-6803');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (31, 'brunciemanu@oaic.gov.au', 'gS8/eb)mRR', 'Beatriz Runcieman', 'Suite 65', 'PO Box 5148', 'Niger', '413-648-3654');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (32, 'cballinghallv@webs.com', 'uU3''Y<qe6o', 'Cathie Ballinghall', 'Suite 93', 'PO Box 49000', 'Poland', '406-941-6676');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (33, 'bbauchopw@nymag.com', 'zE0=z5H7LG(H', 'Bea Bauchop', 'Apt 1726', 'Apt 1696', 'China', '720-784-5608');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (34, 'dromex@constantcontact.com', 'wD4<tRXS##4ZC', 'Daffi Rome', 'Room 1588', 'Apt 1925', 'Andorra', '845-522-6598');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (35, 'pcettelly@linkedin.com', 'iN4+sT4HQY24', 'Prentiss Cettell', 'Room 1850', '12th Floor', 'China', '459-108-3172');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (36, 'rrubinowitzz@1und1.de', 'hD7\AXp`', 'Reinaldo Rubinowitz', 'PO Box 57862', 'Apt 145', 'Israel', '664-705-4216');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (37, 'jullrich10@harvard.edu', 'hU9''|<Zny~d', 'Jephthah Ullrich', 'PO Box 78507', 'Apt 614', 'China', '976-829-3030');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (38, 'abinks11@creativecommons.org', 'aU1.i}&h_RB', 'Aguste Binks', 'PO Box 83186', '9th Floor', 'Philippines', '986-884-0810');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (39, 'rtarzey12@tuttocitta.it', 'jE6&tvYrj)', 'Rubin Tarzey', 'Apt 815', 'Suite 91', 'Indonesia', '795-540-9888');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (40, 'ccasse13@cafepress.com', 'rD9+,$N264w_!dv', 'Candra Casse', 'Apt 509', '10th Floor', 'Syria', '953-148-3389');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (41, 'pstains14@sourceforge.net', 'eG0|N9}+v', 'Paxton Stains', 'Apt 222', 'Room 1404', 'Paraguay', '677-428-5857');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (42, 'kdare15@woothemes.com', 'gO4&58351y8ea', 'Kaleb Dare', 'PO Box 67111', '2nd Floor', 'Ukraine', '285-829-4391');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (43, 'smarielle16@mediafire.com', 'aD3&ccnT,vS', 'Sandye Marielle', 'Apt 385', 'Suite 42', 'Tanzania', '265-680-3467');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (44, 'hbough17@gravatar.com', 'bV0@u{@XNr%clG', 'Hewett Bough', 'PO Box 84969', '18th Floor', 'Indonesia', '546-978-9486');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (45, 'szavattari18@apache.org', 'kE5)s|EX6gqM', 'Storm Zavattari', 'Room 1668', 'PO Box 13116', 'China', '893-391-0632');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (46, 'feccleshall19@sourceforge.net', 'kQ3"Qb#''LZ67\5l', 'Fallon Eccleshall', 'PO Box 83635', '14th Floor', 'China', '716-800-0043');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (47, 'lgages1a@sina.com.cn', 'sM7(<w}v#u"E', 'Lisle Gages', 'Suite 53', 'Apt 1166', 'China', '851-799-6311');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (48, 'rreubel1b@ibm.com', 'fT6}crR=E', 'Rollie Reubel', 'PO Box 30373', '3rd Floor', 'China', '362-645-3398');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (49, 'ddonaldson1c@ca.gov', 'aQ9>%}s''zW`', 'Daniele Donaldson', 'Suite 29', '11th Floor', 'Belarus', '749-438-4887');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (50, 'acathie1d@umn.edu', 'qX9`?.QAOQ!$T', 'Artemis Cathie', '5th Floor', 'PO Box 23931', 'Brazil', '465-675-6257');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (51, 'fathridge1e@spotify.com', 'oI1%FnVuk', 'Fidela Athridge', 'PO Box 17915', 'Apt 429', 'Mongolia', '271-502-9310');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (52, 'bowthwaite1f@gov.uk', 'xZ0)PMT#)eWU', 'Becki Owthwaite', '16th Floor', 'Apt 1923', 'Japan', '223-290-4454');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (53, 'athyer1g@craigslist.org', 'jN3/,i''''jht', 'Alvan Thyer', '14th Floor', 'Apt 157', 'Bulgaria', '562-238-6837');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (54, 'mbartolijn1h@hugedomains.com', 'jF1}{"mVEu%>a', 'Monty Bartolijn', 'Suite 49', 'PO Box 17031', 'Andorra', '424-710-8157');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (55, 'dspinige1i@surveymonkey.com', 'rJ7}T&$R>_CP#dmf', 'Delia Spinige', 'Apt 548', '14th Floor', 'Indonesia', '212-955-4005');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (56, 'rmattingly1j@salon.com', 'zY8<Y8Il\Hdm`0', 'Retha Mattingly', 'PO Box 85022', 'PO Box 13025', 'Philippines', '490-649-7611');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (57, 'tguyonneau1k@psu.edu', 'nG4#RUSjF', 'Tabbitha Guyonneau', 'Suite 23', 'Apt 1484', 'China', '463-326-2212');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (58, 'bknowller1l@slashdot.org', 'cS0&?eBFhM0,j', 'Blondelle Knowller', 'Apt 181', 'PO Box 71914', 'Indonesia', '171-175-3316');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (59, 'slayus1m@toplist.cz', 'nD9{en@w&dfH!h', 'Skip Layus', 'PO Box 71469', 'PO Box 17901', 'Gambia', '379-949-0106');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (60, 'jcurtayne1n@goo.ne.jp', 'cI4*CON\uA"', 'Jorgan Curtayne', 'Apt 21', 'Room 1117', 'Portugal', '251-687-4719');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (61, 'dgumley1o@mapquest.com', 'gE3{3_va0\(I_K', 'Duane Gumley', 'Suite 44', 'Suite 91', 'Slovenia', '487-831-2302');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (62, 'ddanielot1p@netvibes.com', 'uJ4#ENregrp', 'Dusty Danielot', 'PO Box 67338', 'Room 166', 'Belarus', '310-367-3893');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (63, 'nbiddlestone1q@comcast.net', 'wQ2&0*#0E(8sE~e', 'Nedda Biddlestone', 'Suite 39', 'PO Box 91358', 'China', '266-117-2099');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (64, 'emaleney1r@redcross.org', 'hW9<MLjR''g''H#', 'Erinn Maleney', 'PO Box 16415', '7th Floor', 'Russia', '474-181-9862');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (65, 'mokielt1s@tripadvisor.com', 'rS4~+Bk3I{a#2,aW', 'Morna O''Kielt', 'PO Box 58351', '4th Floor', 'China', '132-909-8939');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (66, 'parundale1t@usda.gov', 'sY8.dng$@%.t', 'Page Arundale', 'PO Box 41053', '11th Floor', 'United States', '917-824-5680');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (67, 'fmarrable1u@cnbc.com', 'gA2&1}Pi@R}', 'Friederike Marrable', 'PO Box 16129', 'Suite 66', 'China', '394-573-7327');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (68, 'hcalley1v@google.pl', 'bE0''7?I3wah{as', 'Hewitt Calley', '18th Floor', 'Apt 1794', 'China', '233-814-4086');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (69, 'sguido1w@irs.gov', 'nX2<F+0Y"?JfVP', 'Syd Guido', 'Apt 259', 'Apt 748', 'China', '163-722-6645');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (70, 'kbotterell1x@google.com.br', 'tO1)qS~/}PO<', 'Karine Botterell', '14th Floor', 'PO Box 1906', 'Sweden', '691-560-0005');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (71, 'jbarrows1y@apache.org', 'vS8<WljVG4', 'Juliana Barrows', 'Room 87', 'PO Box 37863', 'Ukraine', '623-661-7058');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (72, 'togrogane1z@umich.edu', 'aE8\vxXY=<,BT', 'Tessa O''Grogane', 'Suite 94', 'PO Box 88782', 'China', '687-842-3448');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (73, 'eiannuzzelli20@elegantthemes.com', 'zW5''daVE!x\Cm', 'Eugenia Iannuzzelli', 'Room 33', 'Suite 73', 'Poland', '734-509-0103');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (74, 'rmaccartney21@omniture.com', 'dU0\9vg6c(>', 'Ricardo MacCartney', 'Apt 28', '15th Floor', 'Indonesia', '845-757-8150');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (75, 'jmurrie22@wordpress.com', 'pO2=LT`Cm~QO', 'Joela Murrie', 'PO Box 55783', 'Room 1166', 'Poland', '991-539-4252');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (76, 'ocottrill23@hhs.gov', 'pF7!OO/pbvV@EA', 'Odelinda Cottrill', 'PO Box 46049', 'Suite 59', 'Indonesia', '496-431-8003');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (77, 'thaukey24@fastcompany.com', 'vP9(8?ytxob3&s', 'Terrance Haukey', 'PO Box 33265', 'Suite 66', 'Tanzania', '439-288-8962');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (78, 'cizod25@springer.com', 'jK8?|W`gc2k41z7', 'Codi Izod', 'Suite 40', 'Suite 11', 'Colombia', '528-889-7459');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (79, 'roheagertie26@upenn.edu', 'uN6=="_0Vt', 'Randolf O''Heagertie', 'Apt 212', '8th Floor', 'Czech Republic', '936-165-8757');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (80, 'bmacvanamy27@yellowpages.com', 'wK9%V3lKnXqcI*', 'Betti MacVanamy', 'Apt 1115', 'Suite 21', 'Philippines', '115-848-4951');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (81, 'ameynell28@soup.io', 'qP9%$3U2"ILyf', 'Abie Meynell', '11th Floor', '6th Floor', 'Japan', '907-595-4371');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (82, 'greams29@discuz.net', 'mV6>~I}H|1Je1$0}', 'Grace Reams', '8th Floor', 'Apt 815', 'Vietnam', '811-821-9530');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (83, 'jshortland2a@newyorker.com', 'gN6.sjHP4', 'Jerrome Shortland', 'Apt 834', '15th Floor', 'China', '815-438-8758');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (84, 'jpermain2b@tinypic.com', 'sV5@5).cnhW+8xJ', 'Janek Permain', 'Room 1744', 'Apt 746', 'Indonesia', '684-891-0502');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (85, 'lgetley2c@addthis.com', 'vO1<_I_,*Qd=U', 'Lezlie Getley', 'Apt 1586', 'PO Box 87462', 'Pakistan', '440-811-7301');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (86, 'mlauchlan2d@oakley.com', 'wQ8&E?)oi3!u{q', 'Maddy Lauchlan', 'PO Box 83911', 'Room 398', 'Portugal', '826-961-8688');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (87, 'uroberto2e@yahoo.co.jp', 'rJ1%${0cw"OW', 'Umeko Roberto', 'Suite 65', 'Apt 1772', 'Bosnia and Herzegovina', '706-977-3616');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (88, 'adegoey2f@kickstarter.com', 'jH1_qK*GNZ}e', 'Ambrosius Degoey', 'PO Box 83125', '12th Floor', 'Burundi', '482-339-9072');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (89, 'kselvester2g@npr.org', 'hF3`>|%''Pj+i2', 'Kerri Selvester', 'Apt 1956', 'Room 1713', 'China', '658-298-4466');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (90, 'bmacalester2h@ox.ac.uk', 'jI2#{83Xm>XA/mP', 'Brooks MacAlester', '11th Floor', '13th Floor', 'Indonesia', '989-421-7535');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (93, 'nitzik2k@independent.co.uk', 'zF1}z.,a', 'Noel Itzik', 'Room 1315', 'Apt 1414', 'China', '549-167-5298');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (94, 'medwicke2l@prlog.org', 'sH9*gq<Y7B.', 'Monro Edwicke', 'Room 969', 'Suite 49', 'France', '237-529-5450');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (95, 'ucoakley2m@google.de', 'gQ7&qJagOi(J', 'Ursula Coakley', 'Apt 464', 'Apt 746', 'Kuwait', '808-972-0461');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (96, 'vhawkridge2n@slideshare.net', 'fL8|%4Wd5', 'Valentino Hawkridge', 'PO Box 65625', '17th Floor', 'Brazil', '413-236-4367');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (97, 'saim2o@telegraph.co.uk', 'yD0{m+.hp'')l3', 'Sibilla Aim', 'PO Box 11785', 'PO Box 27563', 'United States', '619-263-5093');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (98, 'imcgrae2p@elegantthemes.com', 'dV0$<fWs', 'Isabelle McGrae', 'Room 1516', 'Suite 65', 'Russia', '344-630-9794');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (99, 'lcayzer2q@merriam-webster.com', 'gV0<@)RXCla3\$', 'Lucky Cayzer', 'Suite 67', 'Suite 6', 'Russia', '793-830-7916');
+insert into customers (id, email, passwors, full_name, billing_address, default_shipping_address, country, phone) values (100, 'lle2r@homestead.com', 'bH8''wH*cm3J', 'Lesley Le Teve', 'PO Box 45873', 'Suite 67', 'China', '325-136-1078');
+
+
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (1, 85, 22, 'Room 1060', 'Apt 164', 'jfussell0@ca.gov', '2022-12-19', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (2, 62, 33, '1st Floor', '16th Floor', 'ucurnnokk1@goodreads.com', '2023-07-07', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (3, 48, 23, 'Suite 25', 'PO Box 68203', 'gmaase2@spotify.com', '2022-11-13', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (4, 39, 60, 'PO Box 20849', 'PO Box 73682', 'wdenyer3@bandcamp.com', '2023-05-16', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (5, 58, 51, 'Apt 1149', 'PO Box 267', 'tquiney4@twitter.com', '2022-10-29', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (6, 21, 84, 'Room 1780', 'Room 1326', 'lwane5@1688.com', '2023-02-20', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (7, 2, 80, 'PO Box 7356', 'Suite 26', 'lwalthew6@github.com', '2022-12-06', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (8, 14, 52, '20th Floor', '6th Floor', 'epiel7@pinterest.com', '2023-03-27', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (9, 91, 3, 'Apt 1819', '17th Floor', 'sweall8@army.mil', '2023-01-12', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (10, 5, 96, 'PO Box 47950', 'PO Box 27735', 'hscriviner9@miitbeian.gov.cn', '2023-02-01', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (11, 36, 43, '1st Floor', 'PO Box 8625', 'fprudhama@berkeley.edu', '2022-10-26', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (12, 60, 27, 'Apt 1336', 'Apt 359', 'ttusonb@businesswire.com', '2022-12-20', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (13, 88, 80, '4th Floor', 'Room 235', 'cfagencec@techcrunch.com', '2023-02-14', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (14, 31, 50, 'Suite 44', 'Apt 995', 'tbartensd@google.com.hk', '2023-06-05', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (15, 23, 66, '5th Floor', '1st Floor', 'rsteelye@hhs.gov', '2023-01-17', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (16, 55, 25, 'Suite 41', 'Apt 177', 'abraileyf@sciencedaily.com', '2023-03-28', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (17, 44, 64, 'Apt 498', 'PO Box 68319', 'ndowthwaiteg@digg.com', '2023-05-30', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (18, 74, 25, 'PO Box 77780', 'Apt 215', 'smitchelhillh@answers.com', '2022-10-28', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (19, 69, 76, 'Room 1138', '3rd Floor', 'eocanavani@bloomberg.com', '2023-05-22', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (20, 92, 33, '14th Floor', 'Suite 38', 'gknollesgreenj@jimdo.com', '2023-05-21', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (21, 91, 66, 'PO Box 38628', 'PO Box 47514', 'ffitzsimmonsk@ustream.tv', '2023-02-13', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (22, 92, 3, '1st Floor', 'Suite 97', 'astebbingsl@myspace.com', '2022-12-24', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (23, 85, 45, 'Apt 674', 'Room 1800', 'etitlowm@geocities.com', '2023-01-28', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (24, 72, 8, 'Suite 44', 'Suite 75', 'hrogeonn@cdc.gov', '2023-07-20', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (25, 83, 76, 'Suite 75', 'Room 816', 'jcappineero@ted.com', '2023-05-24', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (26, 77, 97, 'Apt 1075', 'Suite 66', 'mferrerop@icq.com', '2023-06-07', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (27, 21, 93, 'Suite 93', '19th Floor', 'bmcandieq@360.cn', '2023-04-04', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (28, 8, 51, 'Suite 30', '1st Floor', 'fstathersr@seesaa.net', '2023-04-18', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (29, 42, 7, 'Suite 27', 'Apt 1091', 'vpitbladdos@forbes.com', '2023-02-25', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (30, 96, 19, 'Apt 5', 'Apt 265', 'pgoleyt@intel.com', '2023-09-17', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (31, 54, 62, 'Apt 532', 'Apt 200', 'gogradyu@dailymotion.com', '2023-07-09', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (32, 35, 73, 'Suite 24', 'Apt 85', 'gkubisv@freewebs.com', '2023-01-21', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (33, 61, 54, 'PO Box 81970', '9th Floor', 'mbottjerw@noaa.gov', '2023-07-27', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (34, 80, 48, 'PO Box 83556', '7th Floor', 'jderrx@statcounter.com', '2023-08-28', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (35, 88, 50, 'Room 906', '14th Floor', 'dyoy@naver.com', '2023-03-17', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (36, 37, 96, 'Room 852', 'Room 142', 'sbaughenz@umn.edu', '2023-02-13', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (37, 26, 52, 'Apt 1099', 'Apt 1997', 'liddenden10@shutterfly.com', '2022-10-18', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (38, 77, 26, '17th Floor', 'Apt 1441', 'glavelle11@hc360.com', '2023-07-07', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (39, 84, 11, 'Apt 1742', 'Apt 1853', 'utoppas12@jalbum.net', '2023-07-17', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (40, 86, 82, 'PO Box 50828', 'Suite 53', 'cundy13@vistaprint.com', '2022-11-28', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (41, 20, 32, 'Room 1144', 'Apt 1636', 'wbelvin14@twitter.com', '2023-06-14', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (42, 45, 82, 'Apt 1654', 'Suite 19', 'aculshaw15@qq.com', '2022-11-09', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (43, 90, 79, 'Suite 92', 'Suite 89', 'deatttok16@wikipedia.org', '2023-09-17', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (44, 10, 59, 'Apt 537', '13th Floor', 'cdavidovitch17@linkedin.com', '2023-03-04', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (45, 77, 89, 'PO Box 83629', 'PO Box 94554', 'tthresh18@npr.org', '2023-07-31', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (46, 28, 94, 'Suite 41', 'Room 840', 'gwilsher19@time.com', '2023-02-13', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (47, 31, 86, '14th Floor', 'PO Box 15172', 'alowdyane1a@usgs.gov', '2023-06-10', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (48, 84, 98, 'Room 13', 'PO Box 91714', 'sbonn1b@cam.ac.uk', '2023-07-24', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (49, 38, 63, '7th Floor', 'Room 491', 'lguerrieri1c@slate.com', '2023-07-16', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (50, 100, 62, 'PO Box 88088', '9th Floor', 'kgirke1d@hatena.ne.jp', '2023-04-07', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (51, 91, 21, 'PO Box 91783', 'Room 1479', 'lmeachen1e@dagondesign.com', '2023-05-25', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (52, 79, 13, 'Suite 58', '11th Floor', 'dlooker1f@nyu.edu', '2023-08-21', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (53, 41, 14, 'Room 519', 'Apt 1933', 'bfader1g@pinterest.com', '2023-01-17', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (54, 40, 87, 'Apt 1868', 'Suite 10', 'lfrayling1h@jugem.jp', '2023-09-01', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (55, 56, 66, 'Room 1993', '7th Floor', 'tkeavy1i@umn.edu', '2023-05-16', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (56, 13, 62, 'PO Box 4106', 'Suite 56', 'bgascoine1j@youtu.be', '2022-12-07', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (57, 37, 46, '13th Floor', 'Room 837', 'ksiegertsz1k@admin.ch', '2023-05-04', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (58, 88, 56, 'PO Box 20638', 'Suite 9', 'jklagges1l@networksolutions.com', '2023-03-31', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (59, 77, 17, 'Room 1697', 'Suite 75', 'mwork1m@cyberchimps.com', '2022-10-25', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (60, 86, 5, 'Apt 740', 'Suite 74', 'hcoupar1n@cyberchimps.com', '2023-03-26', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (61, 86, 98, 'Apt 1725', 'Apt 1078', 'chuard1o@berkeley.edu', '2023-06-24', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (62, 32, 4, 'Apt 913', 'Room 1017', 'ssandwich1p@eventbrite.com', '2023-05-19', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (63, 37, 25, 'Apt 141', '15th Floor', 'hjirusek1q@oracle.com', '2023-09-01', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (64, 30, 29, 'Apt 914', 'Room 589', 'jcosins1r@hibu.com', '2023-07-21', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (65, 99, 51, '4th Floor', '20th Floor', 'dhazeup1s@patch.com', '2023-08-08', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (66, 35, 4, 'Room 161', 'Suite 51', 'erollitt1t@altervista.org', '2022-10-30', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (67, 67, 49, 'Apt 1811', '4th Floor', 'lheister1u@indiatimes.com', '2023-01-24', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (68, 66, 83, 'Apt 770', '8th Floor', 'ddanielli1v@amazon.com', '2022-10-31', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (69, 12, 44, 'PO Box 40732', 'Apt 1565', 'ghentze1w@tmall.com', '2023-09-30', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (70, 39, 41, 'Suite 36', 'Suite 38', 'acumbridge1x@typepad.com', '2023-04-24', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (71, 99, 69, 'Apt 104', 'Room 996', 'lgothard1y@spiegel.de', '2022-10-23', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (72, 100, 65, 'Apt 805', 'PO Box 28481', 'klennon1z@timesonline.co.uk', '2023-08-01', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (73, 52, 91, 'Apt 883', 'Suite 46', 'hmcgovern20@live.com', '2023-08-19', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (74, 31, 98, '16th Floor', '10th Floor', 'tpetrishchev21@howstuffworks.com', '2023-08-04', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (75, 93, 100, 'PO Box 23346', 'Room 868', 'klilbourne22@yahoo.com', '2022-11-01', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (76, 81, 1, 'Suite 63', 'Room 1745', 'cbroker23@cdc.gov', '2023-05-12', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (77, 15, 51, 'Apt 1255', 'Suite 44', 'mmacquarrie24@amazonaws.com', '2023-03-09', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (78, 61, 67, 'Apt 352', 'PO Box 1667', 'dbrentnall25@e-recht24.de', '2023-10-04', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (79, 17, 96, 'PO Box 37268', 'Apt 939', 'akingscott26@squidoo.com', '2023-04-12', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (80, 79, 34, '5th Floor', 'Room 535', 'kmacellar27@baidu.com', '2023-04-17', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (81, 44, 47, 'Suite 80', '12th Floor', 'glinnitt28@sciencedirect.com', '2023-08-30', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (82, 64, 16, 'Suite 9', 'Apt 1031', 'lfranke29@multiply.com', '2023-09-24', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (83, 57, 97, '10th Floor', '12th Floor', 'jsmissen2a@unesco.org', '2023-04-24', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (84, 46, 84, 'Suite 46', '5th Floor', 'ldorsay2b@nymag.com', '2023-08-26', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (85, 3, 7, 'Apt 1635', 'Room 1142', 'jparmeter2c@privacy.gov.au', '2023-01-23', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (86, 67, 22, 'PO Box 38450', '2nd Floor', 'sharbour2d@wp.com', '2023-07-16', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (87, 23, 18, '7th Floor', 'PO Box 49462', 'mmatresse2e@dell.com', '2023-01-04', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (88, 80, 90, 'Apt 1990', 'Suite 62', 'htuny2f@webmd.com', '2022-12-03', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (89, 82, 6, '16th Floor', 'Suite 80', 'mshinefield2g@tinypic.com', '2023-02-11', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (90, 45, 68, 'Room 1958', '16th Floor', 'sivoshin2h@usatoday.com', '2023-02-28', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (91, 25, 40, 'Room 822', '11th Floor', 'jmuskett2i@plala.or.jp', '2023-08-01', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (92, 59, 26, 'Apt 524', 'PO Box 48602', 'jmewis2j@bbb.org', '2023-09-13', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (93, 48, 17, 'Room 665', 'Apt 1022', 'caronstam2k@independent.co.uk', '2023-09-14', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (94, 25, 63, '2nd Floor', 'Suite 68', 'vaujouanet2l@sohu.com', '2023-06-06', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (95, 36, 59, 'PO Box 76730', 'Room 618', 'reastgate2m@last.fm', '2023-06-15', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (96, 57, 58, 'Suite 64', 'PO Box 86051', 'lfilson2n@about.me', '2023-04-08', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (97, 73, 100, 'Apt 926', 'Room 364', 'ktuttle2o@home.pl', '2023-03-20', true);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (98, 28, 10, '10th Floor', '15th Floor', 'askingley2p@house.gov', '2023-02-08', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (99, 79, 67, 'Suite 42', '19th Floor', 'cpetrushanko2q@joomla.org', '2023-03-03', false);
+insert into orders (id, customer_id, ammount, shipping_adress, order_adress, order_email, order_date, order_status) values (100, 54, 8, 'Suite 36', 'Suite 65', 'ckolczynski2r@narod.ru', '2023-10-01', false);
+
+
+insert into categories (id, name, description) values (1, 'Cheese - Comte', 'United Bancshares, Inc.');
+insert into categories (id, name, description) values (2, 'Coffee Decaf Colombian', 'National General Holdings Corp');
+insert into categories (id, name, description) values (3, 'Star Anise, Whole', 'Neothetics, Inc.');
+insert into categories (id, name, description) values (4, 'Wine - Riesling Alsace Ac 2001', 'CSG Systems International, Inc.');
+insert into categories (id, name, description) values (5, 'Coffee Swiss Choc Almond', 'RAIT Financial Trust');
+insert into categories (id, name, description) values (6, 'Coffee Guatemala Dark', 'Pathfinder Bancorp, Inc.');
+insert into categories (id, name, description) values (7, 'Wine - White, Riesling, Semi - Dry', 'BGC Partners, Inc.');
+insert into categories (id, name, description) values (8, 'Cheese - Swiss', 'Cara Therapeutics, Inc.');
+insert into categories (id, name, description) values (9, 'Chocolate Liqueur - Godet White', 'Pinnacle Foods, Inc.');
+insert into categories (id, name, description) values (10, 'Island Oasis - Mango Daiquiri', 'American Realty Investors, Inc.');
+insert into categories (id, name, description) values (11, 'Sweet Pea Sprouts', 'Alpha and Omega Semiconductor Limited');
+insert into categories (id, name, description) values (12, 'Puree - Passion Fruit', 'Century Aluminum Company');
+insert into categories (id, name, description) values (13, 'Turkey - Whole, Fresh', 'Jack Henry & Associates, Inc.');
+insert into categories (id, name, description) values (14, 'Basil - Seedlings Cookstown', 'UGI Corporation');
+insert into categories (id, name, description) values (15, 'Wine - Fino Tio Pepe Gonzalez', 'Tejon Ranch Co');
+insert into categories (id, name, description) values (16, 'Bar Mix - Lemon', 'NewLink Genetics Corporation');
+insert into categories (id, name, description) values (17, 'Crackers - Graham', 'EnLink Midstream, LLC');
+insert into categories (id, name, description) values (18, 'Wine - Jaboulet Cotes Du Rhone', 'Workiva Inc.');
+insert into categories (id, name, description) values (19, 'Orange Roughy 4/6 Oz', 'GigaMedia Limited');
+insert into categories (id, name, description) values (20, 'Thermometer Digital', 'Barclays Inverse US Treasury Composite ETN');
+insert into categories (id, name, description) values (21, 'Sage Derby', 'Nuveen Build America Bond Fund');
+insert into categories (id, name, description) values (22, 'Cheese - St. Andre', 'Alliance National Municipal Income Fund Inc');
+insert into categories (id, name, description) values (23, 'Wine - Bourgogne 2002, La', 'ARMOUR Residential REIT, Inc.');
+insert into categories (id, name, description) values (24, 'Longos - Grilled Salmon With Bbq', 'First Trust High Income ETF');
+insert into categories (id, name, description) values (25, 'Yogurt - Assorted Pack', 'Aoxin Tianli Group, Inc.');
+insert into categories (id, name, description) values (26, 'Pie Pecan', 'Tech Data Corporation');
+insert into categories (id, name, description) values (27, 'Beef - Top Butt Aaa', 'Rudolph Technologies, Inc.');
+insert into categories (id, name, description) values (28, 'Cheese - Brie, Triple Creme', 'Sohu.com Inc.');
+insert into categories (id, name, description) values (29, 'Pepper - Julienne, Frozen', 'Franco-Nevada Corporation');
+insert into categories (id, name, description) values (30, 'Wine - Lamancha Do Crianza', 'Nevro Corp.');
+insert into categories (id, name, description) values (31, 'Cream - 10%', 'Synergy Pharmaceuticals, Inc.');
+insert into categories (id, name, description) values (32, 'Eel - Smoked', 'Seneca Foods Corp.');
+insert into categories (id, name, description) values (33, 'Lettuce - Lambs Mash', 'Sunrun Inc.');
+insert into categories (id, name, description) values (34, 'Wine - Rhine Riesling Wolf Blass', 'NuVasive, Inc.');
+insert into categories (id, name, description) values (35, 'Spice - Chili Powder Mexican', 'PS Business Parks, Inc.');
+insert into categories (id, name, description) values (36, 'Muffin Mix - Morning Glory', 'Adams Natural Resources Fund, Inc.');
+insert into categories (id, name, description) values (37, 'Samosa - Veg', 'Cyclacel Pharmaceuticals, Inc.');
+insert into categories (id, name, description) values (38, 'Corn Syrup', 'Stock Yards Bancorp, Inc.');
+insert into categories (id, name, description) values (39, 'Pasta - Fettuccine, Egg, Fresh', 'General Electric Capital Corporation');
+insert into categories (id, name, description) values (40, 'Shrimp - Baby, Warm Water', 'Yintech Investment Holdings Limited');
+insert into categories (id, name, description) values (41, 'Container - Clear 32 Oz', 'Frontline Ltd.');
+insert into categories (id, name, description) values (42, 'Ice Cream - Vanilla', 'Knoll, Inc.');
+insert into categories (id, name, description) values (43, 'Mix Pina Colada', 'KBL Merger Corp. IV');
+insert into categories (id, name, description) values (44, 'Tomatillo', 'Knoll, Inc.');
+insert into categories (id, name, description) values (45, 'Corn Kernels - Frozen', 'Blueknight Energy Partners L.P., L.L.C.');
+insert into categories (id, name, description) values (46, 'Island Oasis - Pina Colada', 'Blackrock Global');
+insert into categories (id, name, description) values (47, 'Chicken - Tenderloin', 'Pingtan Marine Enterprise Ltd.');
+insert into categories (id, name, description) values (48, 'Sherry - Dry', 'The Spectranetics Corporation');
+insert into categories (id, name, description) values (49, 'Veal - Inside Round / Top, Lean', 'Transdigm Group Incorporated');
+insert into categories (id, name, description) values (50, 'Longos - Chicken Caeser Salad', 'Loncar Cancer Immunotherapy ETF');
+insert into categories (id, name, description) values (51, 'Wine - Chablis 2003 Champs', 'Frontline Ltd.');
+insert into categories (id, name, description) values (52, 'Zucchini - Mini, Green', 'Biocept, Inc.');
+insert into categories (id, name, description) values (53, 'Compound - Passion Fruit', 'Babson Global Short Duration High Yield Fund');
+insert into categories (id, name, description) values (54, 'Cheese - Gorgonzola', 'Neos Therapeutics, Inc.');
+insert into categories (id, name, description) values (55, 'Lettuce - Boston Bib - Organic', 'Platform Specialty Products Corporation');
+insert into categories (id, name, description) values (56, 'Pears - Fiorelle', 'Forest City Realty Trust, Inc.');
+insert into categories (id, name, description) values (57, 'Chicken - Leg / Back Attach', 'Hercules Capital, Inc.');
+insert into categories (id, name, description) values (58, 'Wine - Red, Cabernet Merlot', 'Canada Goose Holdings Inc.');
+insert into categories (id, name, description) values (59, 'Beef - Ox Tongue', 'iShares MSCI Europe Financials Sector Index Fund');
+insert into categories (id, name, description) values (60, 'Wine - Periguita Fonseca', 'Codexis, Inc.');
+insert into categories (id, name, description) values (61, 'Lumpfish Black', 'Western Asset Global High Income Fund Inc');
+insert into categories (id, name, description) values (62, 'Daikon Radish', 'CorVel Corp.');
+insert into categories (id, name, description) values (63, 'Noodles - Steamed Chow Mein', 'Photronics, Inc.');
+insert into categories (id, name, description) values (64, 'Cotton Wet Mop 16 Oz', 'Fidelity Nasdaq Composite Index Tracking Stock');
+insert into categories (id, name, description) values (65, 'Wine - Sauvignon Blanc Oyster', 'Unifirst Corporation');
+insert into categories (id, name, description) values (66, 'Yogurt - Assorted Pack', 'ENDRA Life Sciences Inc.');
+insert into categories (id, name, description) values (67, 'Red Currants', 'VEREIT Inc.');
+insert into categories (id, name, description) values (68, 'Lamb - Bones', 'Kirkland''s, Inc.');
+insert into categories (id, name, description) values (69, 'Orange Roughy 4/6 Oz', 'The Carlyle Group L.P.');
+insert into categories (id, name, description) values (70, 'Wine - Hardys Bankside Shiraz', 'Apollo Investment Corporation');
+insert into categories (id, name, description) values (71, 'Yogurt - French Vanilla', 'Total System Services, Inc.');
+insert into categories (id, name, description) values (72, 'Foie Gras', 'VictoryShares International Volatility Wtd ETF');
+insert into categories (id, name, description) values (73, 'Beef - Tenderloin', 'Hecla Mining Company');
+insert into categories (id, name, description) values (74, 'Split Peas - Yellow, Dry', 'Expedia, Inc.');
+insert into categories (id, name, description) values (75, 'Tomatoes - Orange', 'NuStar Logistics, L.P.');
+insert into categories (id, name, description) values (76, 'Turnip - White', 'Raytheon Company');
+insert into categories (id, name, description) values (77, 'Sping Loaded Cup Dispenser', 'Chatham Lodging Trust (REIT)');
+insert into categories (id, name, description) values (78, 'Blouse / Shirt / Sweater', 'PNC Financial Services Group, Inc. (The)');
+insert into categories (id, name, description) values (79, 'Flounder - Fresh', 'LM Funding America, Inc.');
+insert into categories (id, name, description) values (80, 'Wine - Prosecco Valdobienne', 'Rosetta Genomics Ltd.');
+insert into categories (id, name, description) values (81, 'Blouse / Shirt / Sweater', 'Cascadian Therapeutics, Inc.');
+insert into categories (id, name, description) values (82, 'Sunflower Seed Raw', 'Alexander''s, Inc.');
+insert into categories (id, name, description) values (83, 'Sherry - Dry', 'Alkermes plc');
+insert into categories (id, name, description) values (84, 'Apple - Royal Gala', 'Astec Industries, Inc.');
+insert into categories (id, name, description) values (85, 'Pepper - Red Bell', 'Griffon Corporation');
+insert into categories (id, name, description) values (86, 'Wine - Vineland Estate Semi - Dry', 'Allstate Corporation (The)');
+insert into categories (id, name, description) values (87, 'Pepper - Green', 'Unisys Corporation');
+insert into categories (id, name, description) values (88, 'Mints - Striped Red', 'International Bancshares Corporation');
+insert into categories (id, name, description) values (89, 'Plate Pie Foil', 'Forum Merger Corporation');
+insert into categories (id, name, description) values (90, 'Wine - Red, Cabernet Merlot', 'Home Federal Bancorp, Inc. of Louisiana');
+insert into categories (id, name, description) values (91, 'Tea - Herbal Orange Spice', 'Tower Semiconductor Ltd.');
+insert into categories (id, name, description) values (92, 'Broom And Brush Rack Black', 'PAREXEL International Corporation');
+insert into categories (id, name, description) values (93, 'Nantuket Peach Orange', 'NVIDIA Corporation');
+insert into categories (id, name, description) values (94, 'Cheese - Bakers Cream Cheese', 'Mid-America Apartment Communities, Inc.');
+insert into categories (id, name, description) values (95, 'Chevril', 'Capital One Financial Corporation');
+insert into categories (id, name, description) values (96, 'Wine - White, Gewurtzraminer', 'Ecopetrol S.A.');
+insert into categories (id, name, description) values (97, 'Foam Tray S2', 'YRC Worldwide, Inc.');
+insert into categories (id, name, description) values (98, 'Chicken - Tenderloin', 'Alere Inc.');
+insert into categories (id, name, description) values (99, 'Crackers Cheez It', 'Micronet Enertec Technologies, Inc.');
+insert into categories (id, name, description) values (100, 'Ham - Procutinni', 'Customers Bancorp, Inc');
+
+
+insert into options (id, option_name) values (1, 'Benzoin Tincture');
+insert into options (id, option_name) values (2, 'Foradil');
+insert into options (id, option_name) values (3, 'Prednisone');
+insert into options (id, option_name) values (4, 'Isopropyl Alcohol');
+insert into options (id, option_name) values (5, 'Oxybutynin Chloride');
+insert into options (id, option_name) values (6, 'Pleo Ut S');
+insert into options (id, option_name) values (7, 'Carvedilol');
+insert into options (id, option_name) values (8, 'Calcipotriene');
+insert into options (id, option_name) values (9, 'Frankincense and Myrrh Carpal Tunnel');
+insert into options (id, option_name) values (10, 'Enhance Remedy For Women');
+insert into options (id, option_name) values (11, 'Dr Wises Formula Intestinal Calm');
+insert into options (id, option_name) values (12, 'Wal-Phed PE');
+insert into options (id, option_name) values (13, 'Timeless EGF Power');
+insert into options (id, option_name) values (14, 'LoHist PEB DM');
+insert into options (id, option_name) values (15, 'TRICARE PRENATAL');
+insert into options (id, option_name) values (16, 'GUNA-RERIO');
+insert into options (id, option_name) values (17, 'TIAGABINE HYDROCHLORIDE');
+insert into options (id, option_name) values (18, 'smart sense gas relief');
+insert into options (id, option_name) values (19, 'Mary Kay Tinted Moisturizer Sunscreen SPF 20 Bronze 1');
+insert into options (id, option_name) values (20, 'Aruba Aloe Deodorant Ladies');
+insert into options (id, option_name) values (21, 'Antiseptic');
+insert into options (id, option_name) values (22, 'Azithromycin Dihydrate');
+insert into options (id, option_name) values (23, 'AVINZA');
+insert into options (id, option_name) values (24, 'Anti-Bacterial Hand');
+insert into options (id, option_name) values (25, 'Minus-Sol Facial Sun Protection Sunscreen Broad Spectrum SPF 30 Plus White');
+insert into options (id, option_name) values (26, 'Hydrocodone Bitartrate and Ibuprofen');
+insert into options (id, option_name) values (27, 'Se-Natal 19');
+insert into options (id, option_name) values (28, 'health mart antacid');
+insert into options (id, option_name) values (29, 'Acetaminophen, Phenylephrine Hydrochloride');
+insert into options (id, option_name) values (30, 'Anastrozole');
+insert into options (id, option_name) values (31, 'Bahia Grass');
+insert into options (id, option_name) values (32, 'Childrens Allergy Relief');
+insert into options (id, option_name) values (33, 'Carvedilol');
+insert into options (id, option_name) values (34, 'Lancell hair loss prevention hair grower clean formula');
+insert into options (id, option_name) values (35, 'RANITIDINE');
+insert into options (id, option_name) values (36, 'Clindamycin in 5 Percent Dextrose');
+insert into options (id, option_name) values (37, 'Alendronate Sodium');
+insert into options (id, option_name) values (38, 'Prednisolone Sodium Phosphate');
+insert into options (id, option_name) values (39, 'femhrt');
+insert into options (id, option_name) values (40, 'Fycompa');
+insert into options (id, option_name) values (41, 'Mesna');
+insert into options (id, option_name) values (42, 'Ibuprofen');
+insert into options (id, option_name) values (43, 'Lisinopril');
+insert into options (id, option_name) values (44, 'Nighttime sinus');
+insert into options (id, option_name) values (45, 'Ranexa');
+insert into options (id, option_name) values (46, 'Simethicone');
+insert into options (id, option_name) values (47, 'Pain Relief');
+insert into options (id, option_name) values (48, 'Absorbine Jr');
+insert into options (id, option_name) values (49, 'Lyrica');
+insert into options (id, option_name) values (50, 'GABAPENTIN');
+insert into options (id, option_name) values (51, 'BANANA BOAT');
+insert into options (id, option_name) values (52, 'sunmark ibuprofen');
+insert into options (id, option_name) values (53, 'Sure Original Solid Fresh Scent');
+insert into options (id, option_name) values (54, 'ZO SKIN HEALTH');
+insert into options (id, option_name) values (55, 'albuterol sulfate');
+insert into options (id, option_name) values (56, 'Naloxone Hydrochloride');
+insert into options (id, option_name) values (57, 'Labetalol Hydrochloride');
+insert into options (id, option_name) values (58, 'Ceftazidime');
+insert into options (id, option_name) values (59, 'DAPTACEL');
+insert into options (id, option_name) values (60, 'Pre Dental Visit');
+insert into options (id, option_name) values (61, 'Lipitor');
+insert into options (id, option_name) values (62, 'Rite Aid');
+insert into options (id, option_name) values (63, 'Anti Nausea');
+insert into options (id, option_name) values (64, 'Promethazine Hydrochloride');
+insert into options (id, option_name) values (65, 'Neutrogena Healthy Skin Brightening Eye Perfector');
+insert into options (id, option_name) values (66, 'PIGWEED MIX, ROUGH/SPINY POLLEN');
+insert into options (id, option_name) values (67, 'Tickling Cough');
+insert into options (id, option_name) values (68, 'Testosterone');
+insert into options (id, option_name) values (69, 'Dove');
+insert into options (id, option_name) values (70, 'Pleo Rub');
+insert into options (id, option_name) values (71, 'Zyprexa');
+insert into options (id, option_name) values (72, 'Diclofenac Potassium');
+insert into options (id, option_name) values (73, 'Loratadine');
+insert into options (id, option_name) values (74, 'ABELMOSCHUS');
+insert into options (id, option_name) values (75, 'pain relief');
+insert into options (id, option_name) values (76, 'Simvastatin');
+insert into options (id, option_name) values (77, 'Amlodipine Besylate');
+insert into options (id, option_name) values (78, 'LOreal Paris Visible lift Medium Deep CC Broad Spectrum SPF 20');
+insert into options (id, option_name) values (79, 'Zep Commercial Antibacterial Pear');
+insert into options (id, option_name) values (80, 'Loperamide HCl');
+insert into options (id, option_name) values (81, 'Hydrocortisone');
+insert into options (id, option_name) values (82, 'INSTANT Hand Sanitizer Extra Enriched With Vitamin E Strawberry Scent');
+insert into options (id, option_name) values (83, 'Lactulose');
+insert into options (id, option_name) values (84, 'IPKN Moist and Firm BB 02 MEDIUM');
+insert into options (id, option_name) values (85, 'SOLIE');
+insert into options (id, option_name) values (86, 'Estradiol');
+insert into options (id, option_name) values (87, 'Benazepril Hydrochloride');
+insert into options (id, option_name) values (88, 'IPRATROPIUM BROMIDE AND ALBUTEROL SULFATE');
+insert into options (id, option_name) values (89, 'Zolpidem Tartrate');
+insert into options (id, option_name) values (90, 'Sertraline Hydrochloride');
+insert into options (id, option_name) values (91, 'ALCOHOL');
+insert into options (id, option_name) values (92, 'Hydrogen Peroxide');
+insert into options (id, option_name) values (93, 'Nabumetone');
+insert into options (id, option_name) values (94, 'topcare pain relief pm');
+insert into options (id, option_name) values (95, 'EZ-OX');
+insert into options (id, option_name) values (96, 'GLONOINUM');
+insert into options (id, option_name) values (97, 'Ceftriaxone');
+insert into options (id, option_name) values (98, 'Citrus Cydonia 7');
+insert into options (id, option_name) values (99, 'Medicated Body');
+insert into options (id, option_name) values (100, 'PANTOPRAZOLE SODIUM');
+
+
+insert into product_option (id, option_id, product_id) values (1, 56, 100);
+insert into product_option (id, option_id, product_id) values (2, 73, 33);
+insert into product_option (id, option_id, product_id) values (3, 36, 46);
+insert into product_option (id, option_id, product_id) values (4, 68, 38);
+insert into product_option (id, option_id, product_id) values (5, 30, 94);
+insert into product_option (id, option_id, product_id) values (6, 73, 45);
+insert into product_option (id, option_id, product_id) values (7, 73, 75);
+insert into product_option (id, option_id, product_id) values (8, 2, 66);
+insert into product_option (id, option_id, product_id) values (9, 29, 8);
+insert into product_option (id, option_id, product_id) values (10, 100, 11);
+insert into product_option (id, option_id, product_id) values (11, 24, 41);
+insert into product_option (id, option_id, product_id) values (12, 68, 16);
+insert into product_option (id, option_id, product_id) values (13, 16, 64);
+insert into product_option (id, option_id, product_id) values (14, 17, 59);
+insert into product_option (id, option_id, product_id) values (15, 55, 58);
+insert into product_option (id, option_id, product_id) values (16, 53, 2);
+insert into product_option (id, option_id, product_id) values (17, 99, 58);
+insert into product_option (id, option_id, product_id) values (18, 35, 49);
+insert into product_option (id, option_id, product_id) values (19, 91, 3);
+insert into product_option (id, option_id, product_id) values (20, 4, 61);
+insert into product_option (id, option_id, product_id) values (21, 39, 65);
+insert into product_option (id, option_id, product_id) values (22, 65, 32);
+insert into product_option (id, option_id, product_id) values (23, 90, 63);
+insert into product_option (id, option_id, product_id) values (24, 7, 22);
+insert into product_option (id, option_id, product_id) values (25, 37, 6);
+insert into product_option (id, option_id, product_id) values (26, 99, 63);
+insert into product_option (id, option_id, product_id) values (27, 50, 51);
+insert into product_option (id, option_id, product_id) values (28, 70, 47);
+insert into product_option (id, option_id, product_id) values (29, 5, 11);
+insert into product_option (id, option_id, product_id) values (30, 39, 16);
+insert into product_option (id, option_id, product_id) values (31, 75, 34);
+insert into product_option (id, option_id, product_id) values (32, 99, 19);
+insert into product_option (id, option_id, product_id) values (33, 54, 88);
+insert into product_option (id, option_id, product_id) values (34, 19, 9);
+insert into product_option (id, option_id, product_id) values (35, 73, 97);
+insert into product_option (id, option_id, product_id) values (36, 68, 32);
+insert into product_option (id, option_id, product_id) values (37, 79, 23);
+insert into product_option (id, option_id, product_id) values (38, 23, 6);
+insert into product_option (id, option_id, product_id) values (39, 28, 47);
+insert into product_option (id, option_id, product_id) values (40, 7, 65);
+insert into product_option (id, option_id, product_id) values (41, 69, 24);
+insert into product_option (id, option_id, product_id) values (42, 82, 61);
+insert into product_option (id, option_id, product_id) values (43, 59, 10);
+insert into product_option (id, option_id, product_id) values (44, 60, 12);
+insert into product_option (id, option_id, product_id) values (45, 48, 85);
+insert into product_option (id, option_id, product_id) values (46, 20, 25);
+insert into product_option (id, option_id, product_id) values (47, 5, 99);
+insert into product_option (id, option_id, product_id) values (48, 11, 4);
+insert into product_option (id, option_id, product_id) values (49, 84, 66);
+insert into product_option (id, option_id, product_id) values (50, 99, 91);
+insert into product_option (id, option_id, product_id) values (51, 53, 18);
+insert into product_option (id, option_id, product_id) values (52, 55, 90);
+insert into product_option (id, option_id, product_id) values (53, 87, 2);
+insert into product_option (id, option_id, product_id) values (54, 34, 41);
+insert into product_option (id, option_id, product_id) values (55, 86, 48);
+insert into product_option (id, option_id, product_id) values (56, 95, 64);
+insert into product_option (id, option_id, product_id) values (57, 58, 21);
+insert into product_option (id, option_id, product_id) values (58, 31, 33);
+insert into product_option (id, option_id, product_id) values (59, 9, 99);
+insert into product_option (id, option_id, product_id) values (60, 24, 54);
+insert into product_option (id, option_id, product_id) values (61, 29, 27);
+insert into product_option (id, option_id, product_id) values (62, 18, 63);
+insert into product_option (id, option_id, product_id) values (63, 75, 39);
+insert into product_option (id, option_id, product_id) values (64, 18, 14);
+insert into product_option (id, option_id, product_id) values (65, 18, 10);
+insert into product_option (id, option_id, product_id) values (66, 91, 82);
+insert into product_option (id, option_id, product_id) values (67, 36, 65);
+insert into product_option (id, option_id, product_id) values (68, 48, 87);
+insert into product_option (id, option_id, product_id) values (69, 25, 83);
+insert into product_option (id, option_id, product_id) values (70, 43, 83);
+insert into product_option (id, option_id, product_id) values (71, 7, 72);
+insert into product_option (id, option_id, product_id) values (72, 49, 4);
+insert into product_option (id, option_id, product_id) values (73, 38, 69);
+insert into product_option (id, option_id, product_id) values (74, 36, 65);
+insert into product_option (id, option_id, product_id) values (75, 43, 18);
+insert into product_option (id, option_id, product_id) values (76, 17, 59);
+insert into product_option (id, option_id, product_id) values (77, 98, 90);
+insert into product_option (id, option_id, product_id) values (78, 25, 16);
+insert into product_option (id, option_id, product_id) values (79, 18, 89);
+insert into product_option (id, option_id, product_id) values (80, 81, 38);
+insert into product_option (id, option_id, product_id) values (81, 17, 85);
+insert into product_option (id, option_id, product_id) values (82, 85, 11);
+insert into product_option (id, option_id, product_id) values (83, 17, 93);
+insert into product_option (id, option_id, product_id) values (84, 30, 42);
+insert into product_option (id, option_id, product_id) values (85, 51, 85);
+insert into product_option (id, option_id, product_id) values (86, 33, 78);
+insert into product_option (id, option_id, product_id) values (87, 87, 41);
+insert into product_option (id, option_id, product_id) values (88, 99, 43);
+insert into product_option (id, option_id, product_id) values (89, 88, 96);
+insert into product_option (id, option_id, product_id) values (90, 44, 21);
+insert into product_option (id, option_id, product_id) values (91, 21, 35);
+insert into product_option (id, option_id, product_id) values (92, 29, 83);
+insert into product_option (id, option_id, product_id) values (93, 41, 23);
+insert into product_option (id, option_id, product_id) values (94, 86, 85);
+insert into product_option (id, option_id, product_id) values (95, 10, 79);
+insert into product_option (id, option_id, product_id) values (96, 71, 9);
+insert into product_option (id, option_id, product_id) values (97, 65, 18);
+insert into product_option (id, option_id, product_id) values (98, 62, 98);
+insert into product_option (id, option_id, product_id) values (99, 1, 34);
+insert into product_option (id, option_id, product_id) values (100, 50, 100);
+
+
+insert into product_categories (id, product_id, category_id) values (1, 86, 71);
+insert into product_categories (id, product_id, category_id) values (2, 83, 12);
+insert into product_categories (id, product_id, category_id) values (3, 55, 17);
+insert into product_categories (id, product_id, category_id) values (4, 16, 58);
+insert into product_categories (id, product_id, category_id) values (5, 73, 51);
+insert into product_categories (id, product_id, category_id) values (6, 85, 46);
+insert into product_categories (id, product_id, category_id) values (7, 49, 56);
+insert into product_categories (id, product_id, category_id) values (8, 95, 51);
+insert into product_categories (id, product_id, category_id) values (9, 19, 56);
+insert into product_categories (id, product_id, category_id) values (10, 66, 51);
+insert into product_categories (id, product_id, category_id) values (11, 17, 12);
+insert into product_categories (id, product_id, category_id) values (12, 61, 29);
+insert into product_categories (id, product_id, category_id) values (13, 59, 30);
+insert into product_categories (id, product_id, category_id) values (14, 62, 13);
+insert into product_categories (id, product_id, category_id) values (15, 91, 75);
+insert into product_categories (id, product_id, category_id) values (16, 72, 92);
+insert into product_categories (id, product_id, category_id) values (17, 32, 34);
+insert into product_categories (id, product_id, category_id) values (18, 56, 11);
+insert into product_categories (id, product_id, category_id) values (19, 40, 29);
+insert into product_categories (id, product_id, category_id) values (20, 96, 21);
+insert into product_categories (id, product_id, category_id) values (21, 61, 96);
+insert into product_categories (id, product_id, category_id) values (22, 100, 59);
+insert into product_categories (id, product_id, category_id) values (23, 47, 55);
+insert into product_categories (id, product_id, category_id) values (24, 87, 29);
+insert into product_categories (id, product_id, category_id) values (25, 77, 57);
+insert into product_categories (id, product_id, category_id) values (26, 55, 19);
+insert into product_categories (id, product_id, category_id) values (27, 25, 77);
+insert into product_categories (id, product_id, category_id) values (28, 69, 61);
+insert into product_categories (id, product_id, category_id) values (29, 28, 18);
+insert into product_categories (id, product_id, category_id) values (30, 27, 50);
+insert into product_categories (id, product_id, category_id) values (31, 83, 60);
+insert into product_categories (id, product_id, category_id) values (32, 53, 82);
+insert into product_categories (id, product_id, category_id) values (33, 63, 54);
+insert into product_categories (id, product_id, category_id) values (34, 97, 5);
+insert into product_categories (id, product_id, category_id) values (35, 63, 51);
+insert into product_categories (id, product_id, category_id) values (36, 87, 25);
+insert into product_categories (id, product_id, category_id) values (37, 84, 46);
+insert into product_categories (id, product_id, category_id) values (38, 76, 92);
+insert into product_categories (id, product_id, category_id) values (39, 91, 65);
+insert into product_categories (id, product_id, category_id) values (40, 72, 69);
+insert into product_categories (id, product_id, category_id) values (41, 39, 16);
+insert into product_categories (id, product_id, category_id) values (42, 97, 36);
+insert into product_categories (id, product_id, category_id) values (43, 43, 31);
+insert into product_categories (id, product_id, category_id) values (44, 52, 17);
+insert into product_categories (id, product_id, category_id) values (45, 41, 83);
+insert into product_categories (id, product_id, category_id) values (46, 64, 57);
+insert into product_categories (id, product_id, category_id) values (47, 92, 48);
+insert into product_categories (id, product_id, category_id) values (48, 77, 63);
+insert into product_categories (id, product_id, category_id) values (49, 46, 19);
+insert into product_categories (id, product_id, category_id) values (50, 69, 63);
+insert into product_categories (id, product_id, category_id) values (51, 6, 39);
+insert into product_categories (id, product_id, category_id) values (52, 54, 37);
+insert into product_categories (id, product_id, category_id) values (53, 31, 53);
+insert into product_categories (id, product_id, category_id) values (54, 88, 69);
+insert into product_categories (id, product_id, category_id) values (55, 23, 92);
+insert into product_categories (id, product_id, category_id) values (56, 64, 61);
+insert into product_categories (id, product_id, category_id) values (57, 7, 29);
+insert into product_categories (id, product_id, category_id) values (58, 5, 89);
+insert into product_categories (id, product_id, category_id) values (59, 86, 55);
+insert into product_categories (id, product_id, category_id) values (60, 23, 48);
+insert into product_categories (id, product_id, category_id) values (61, 11, 42);
+insert into product_categories (id, product_id, category_id) values (62, 26, 41);
+insert into product_categories (id, product_id, category_id) values (63, 57, 64);
+insert into product_categories (id, product_id, category_id) values (64, 70, 95);
+insert into product_categories (id, product_id, category_id) values (65, 100, 96);
+insert into product_categories (id, product_id, category_id) values (66, 81, 24);
+insert into product_categories (id, product_id, category_id) values (67, 80, 80);
+insert into product_categories (id, product_id, category_id) values (68, 97, 6);
+insert into product_categories (id, product_id, category_id) values (69, 33, 93);
+insert into product_categories (id, product_id, category_id) values (70, 37, 28);
+insert into product_categories (id, product_id, category_id) values (71, 10, 52);
+insert into product_categories (id, product_id, category_id) values (72, 96, 15);
+insert into product_categories (id, product_id, category_id) values (73, 88, 29);
+insert into product_categories (id, product_id, category_id) values (74, 72, 17);
+insert into product_categories (id, product_id, category_id) values (75, 58, 89);
+insert into product_categories (id, product_id, category_id) values (76, 41, 18);
+insert into product_categories (id, product_id, category_id) values (77, 35, 43);
+insert into product_categories (id, product_id, category_id) values (78, 46, 99);
+insert into product_categories (id, product_id, category_id) values (79, 32, 32);
+insert into product_categories (id, product_id, category_id) values (80, 95, 7);
+insert into product_categories (id, product_id, category_id) values (81, 22, 100);
+insert into product_categories (id, product_id, category_id) values (82, 26, 22);
+insert into product_categories (id, product_id, category_id) values (83, 25, 57);
+insert into product_categories (id, product_id, category_id) values (84, 53, 82);
+insert into product_categories (id, product_id, category_id) values (85, 45, 78);
+insert into product_categories (id, product_id, category_id) values (86, 58, 22);
+insert into product_categories (id, product_id, category_id) values (87, 93, 1);
+insert into product_categories (id, product_id, category_id) values (88, 87, 65);
+insert into product_categories (id, product_id, category_id) values (89, 42, 14);
+insert into product_categories (id, product_id, category_id) values (90, 98, 98);
+insert into product_categories (id, product_id, category_id) values (91, 31, 68);
+insert into product_categories (id, product_id, category_id) values (92, 29, 92);
+insert into product_categories (id, product_id, category_id) values (93, 64, 89);
+insert into product_categories (id, product_id, category_id) values (94, 96, 82);
+insert into product_categories (id, product_id, category_id) values (95, 90, 53);
+insert into product_categories (id, product_id, category_id) values (96, 14, 99);
+insert into product_categories (id, product_id, category_id) values (97, 45, 19);
+insert into product_categories (id, product_id, category_id) values (98, 90, 79);
+insert into product_categories (id, product_id, category_id) values (99, 66, 37);
+insert into product_categories (id, product_id, category_id) values (100, 54, 18);
+
+
+
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (1, 1, 1, 827, 21, 8);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (2, 2, 2, 1744, 39, 97);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (3, 3, 3, 966, 39, 70);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (4, 4, 4, 2096, 90, 13);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (5, 5, 5, 894, 85, 59);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (6, 6, 6, 876, 11, 44);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (7, 7, 7, 3847, 36, 12);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (8, 8, 8, 4146, 74, 2);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (10, 10, 10, 1545, 25, 87);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (11, 11, 11, 1683, 41, 67);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (12, 12, 12, 4181, 66, 38);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (13, 13, 13, 1527, 39, 10);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (14, 14, 14, 4408, 63, 74);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (15, 15, 15, 3103, 13, 91);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (16, 16, 16, 2690, 55, 4);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (17, 17, 17, 3821, 90, 48);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (18, 18, 18, 4166, 100, 16);
+insert into order_details (id, order_id, product_id, price, sku, quantity) values (19, 19, 19, 1958, 46, 17);
+
+SELECT p.name, p.price, p.descriptions, o.option_name, c.name AS category
+FROM products p
+LEFT JOIN product_option po ON p.id = po.product_id
+LEFT JOIN options o ON po.option_id = o.id
+LEFT JOIN product_categories pc ON p.id = pc.product_id
+LEFT JOIN categories c ON pc.category_id = c.id
+WHERE p.id = 1;
+
+SELECT c.full_name, SUM(o.ammount) AS total_cheltuieli
+FROM customers c
+LEFT JOIN orders o ON c.id = o.customer_id
+GROUP BY c.full_name;
+
+
+SELECT name, price
+FROM products
+WHERE stock > 0
+ORDER BY price DESC;
+
+
+SELECT c.name AS category, COUNT(od.product_id) AS numar_produse_vandute
+FROM categories c
+LEFT JOIN product_categories pc ON c.id = pc.category_id
+LEFT JOIN order_details od ON pc.product_id = od.product_id
+GROUP BY c.name
+ORDER BY numar_produse_vandute DESC;
+
+SELECT o.id, c.full_name, o.order_date, o.order_status
+FROM orders o
+INNER JOIN customers c ON o.customer_id = c.id
+WHERE c.country = 'USA';
+
+
+SELECT c.full_name, COUNT(DISTINCT pc.category_id) AS numar_categorii_cumparate
+FROM customers c
+LEFT JOIN orders o ON c.id = o.customer_id
+LEFT JOIN order_details od ON o.id = od.order_id
+LEFT JOIN product_categories pc ON od.product_id = pc.product_id
+GROUP BY c.full_name
+HAVING numar_categorii_cumparate > 1;
+
+
+SELECT name, stock
+FROM products
+ORDER BY stock ASC
+LIMIT 10;
+
+
+
+SELECT p.name, COUNT(od.product_id) AS numar_comenzi
+FROM products p
+LEFT JOIN order_details od ON p.id = od.product_id
+GROUP BY p.name
+ORDER BY numar_comenzi DESC;
+
+SELECT c.full_name, SUM(o.ammount) AS suma_totala
+FROM customers c
+LEFT JOIN orders o ON c.id = o.customer_id
+GROUP BY c.full_name
+ORDER BY suma_totala DESC
+LIMIT 10;
+
+SELECT c.full_name, AVG(od.quantity) AS numar_mediu_produse_comandate
+FROM customers c
+LEFT JOIN orders o ON c.id = o.customer_id
+LEFT JOIN order_details od ON o.id = od.order_id
+GROUP BY c.full_name
+ORDER BY numar_mediu_produse_comandate DESC;
+
+
+SELECT o.id, c.full_name AS nume_client, p.name AS nume_produs, od.quantity, od.price, o.order_date, o.order_status
+FROM orders o
+LEFT JOIN customers c ON o.customer_id = c.id
+LEFT JOIN order_details od ON o.id = od.order_id
+LEFT JOIN products p ON od.product_id = p.id
+ORDER BY o.order_date DESC
+LIMIT 10;
+
+
+SELECT p.name, COUNT(od.product_id) AS numar_comenzi
+FROM products p
+LEFT JOIN order_details od ON p.id = od.product_id
+GROUP BY p.name
+ORDER BY numar_comenzi ASC;
